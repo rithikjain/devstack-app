@@ -1,4 +1,5 @@
 import 'package:devtalks/src/presentation/animations/show_up.dart';
+import 'package:devtalks/src/presentation/screens/auth/auth_screen.dart';
 import 'package:devtalks/src/presentation/themes/themes.dart';
 import 'package:devtalks/src/presentation/widgets/bg_gradient.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +68,9 @@ class LandingScreen extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: borderRadius12,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, AuthScreen.routename);
+                    },
                     color: palePink,
                   ),
                 ],

@@ -1,3 +1,4 @@
+import 'package:devtalks/src/presentation/screens/auth/auth_screen.dart';
 import 'package:devtalks/src/presentation/screens/landing/landing_screen.dart';
 import 'package:devtalks/src/presentation/themes/themes.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       home: LandingScreen(),
       routes: {
         LandingScreen.routename: (context) => LandingScreen(),
+        AuthScreen.routename: (context) => AuthScreen(),
       },
     );
   }
