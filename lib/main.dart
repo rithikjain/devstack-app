@@ -1,5 +1,6 @@
 import 'package:devtalks/src/presentation/screens/auth/auth_screen.dart';
 import 'package:devtalks/src/presentation/screens/landing/landing_screen.dart';
+import 'package:devtalks/src/presentation/screens/main/base_screen.dart';
 import 'package:devtalks/src/presentation/themes/themes.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
       routes: {
         LandingScreen.routename: (context) => LandingScreen(),
         AuthScreen.routename: (context) => AuthScreen(),
+        BaseScreen.routename: (context) => BaseScreen(),
       },
     );
   }
