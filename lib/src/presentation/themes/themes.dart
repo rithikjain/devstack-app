@@ -24,6 +24,9 @@ final pageTransition = PageTransitionsTheme(
   },
 );
 
+// cicular border radius with value 12
+final borderRadius12 = BorderRadius.circular(12);
+
 final ThemeData lightTheme = ThemeData(
   fontFamily: 'Metropolis',
   accentColor: palePink,
