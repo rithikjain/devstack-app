@@ -9,3 +9,13 @@ const WhiteText = TextStyle(
 const PalePinkText = TextStyle(
   color: palePink,
 );
+
+const BlackHeadingText = TextStyle(
+  fontSize: 22,
+  fontWeight: FontWeight.bold,
+);
+
+const BlueText = TextStyle(
+  color: lightBlue,
+  fontSize: 16,
+);

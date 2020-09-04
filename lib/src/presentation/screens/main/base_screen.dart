@@ -1,3 +1,4 @@
+import 'package:devtalks/src/presentation/screens/main/speakers_screen.dart';
 import 'package:devtalks/src/presentation/themes/themes.dart';
 import 'package:devtalks/src/presentation/widgets/bg_gradient.dart';
 import 'package:flutter/material.dart';
@@ -12,10 +13,23 @@ class BaseScreen extends StatefulWidget {
 class _BaseScreenState extends State<BaseScreen> {
   int _currIndex = 0;
 
+  List<Widget> screens = [
+    Container(),
+    SpeakersScreen(),
+    Container(),
+    Container(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BgGradient(),
+      appBar: AppBar(elevation: 0, leading: Container()),
+      body: Stack(
+        children: [
+          BgGradient(),
+          screens[_currIndex],
+        ],
+      ),
       extendBody: true,
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadius.only(
