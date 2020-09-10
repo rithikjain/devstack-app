@@ -17,7 +17,7 @@ class SpeakersScreen extends StatelessWidget {
           Row(
             children: [
               GestureDetector(
-                child: Icon(Icons.navigate_before, color: palePink, size: 64),
+                child: Icon(Icons.navigate_before, color: palePink, size: 48),
                 onTap: () {
                   _carouselController.previousPage();
                 },
@@ -42,7 +42,7 @@ class SpeakersScreen extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                child: Icon(Icons.navigate_next, color: palePink, size: 64),
+                child: Icon(Icons.navigate_next, color: palePink, size: 48),
                 onTap: () {
                   _carouselController.nextPage();
                 },
