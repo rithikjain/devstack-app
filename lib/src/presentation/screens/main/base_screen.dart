@@ -23,7 +23,12 @@ class _BaseScreenState extends State<BaseScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(elevation: 0, leading: Container()),
+      appBar: AppBar(
+        leading: Container(),
+        elevation: 0,
+        title: Text("DEVSTACK"),
+        centerTitle: true,
+      ),
       body: Stack(
         children: [
           BgGradient(),

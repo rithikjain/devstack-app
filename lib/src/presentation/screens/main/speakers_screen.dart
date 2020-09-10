@@ -3,17 +3,54 @@ import 'package:devtalks/src/presentation/themes/themes.dart';
 import 'package:devtalks/src/presentation/widgets/speaker_card.dart';
 import 'package:flutter/material.dart';
 
-class SpeakersScreen extends StatelessWidget {
+class SpeakersScreen extends StatefulWidget {
+  @override
+  _SpeakersScreenState createState() => _SpeakersScreenState();
+}
+
+class _SpeakersScreenState extends State<SpeakersScreen>
+    with SingleTickerProviderStateMixin {
   final CarouselController _carouselController = CarouselController();
+  TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(vsync: this, length: 2);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TabBar(
+                    controller: _tabController,
+                    tabs: [
+                      Tab(text: 'Speakers'),
+                      Tab(text: 'Sponsors'),
+                    ],
+                    indicatorSize: TabBarIndicatorSize.label,
+                    indicatorWeight: 4,
+                    labelColor: palePink,
+                    unselectedLabelColor: Colors.white54,
+                    labelStyle: TextStyle(
+                      fontSize: 19,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
           Row(
             children: [
               GestureDetector(
