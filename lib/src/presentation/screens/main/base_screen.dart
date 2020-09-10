@@ -1,3 +1,4 @@
+import 'package:devtalks/src/presentation/screens/main/home_screen.dart';
 import 'package:devtalks/src/presentation/screens/main/speakers_screen.dart';
 import 'package:devtalks/src/presentation/themes/themes.dart';
 import 'package:devtalks/src/presentation/widgets/bg_gradient.dart';
@@ -14,7 +15,7 @@ class _BaseScreenState extends State<BaseScreen> {
   int _currIndex = 0;
 
   List<Widget> screens = [
-    Container(),
+    HomeScreen(),
     SpeakersScreen(),
     Container(),
     Container(),
