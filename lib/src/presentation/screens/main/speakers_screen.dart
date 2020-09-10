@@ -19,6 +19,90 @@ class _SpeakersScreenState extends State<SpeakersScreen>
     _tabController = TabController(vsync: this, length: 2);
   }
 
+  Widget buildSpeakersUI(BuildContext context) {
+    return Align(
+      alignment: Alignment.topCenter,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          GestureDetector(
+            child: Icon(Icons.navigate_before, color: palePink, size: 48),
+            onTap: () {
+              _carouselController.previousPage();
+            },
+          ),
+          Expanded(
+            child: CarouselSlider(
+              carouselController: _carouselController,
+              items: [
+                SpeakerCard(),
+                SpeakerCard(),
+                SpeakerCard(),
+                SpeakerCard(),
+              ],
+              options: CarouselOptions(
+                autoPlay: false,
+                initialPage: 0,
+                height: MediaQuery.of(context).size.height * 4 / 7,
+                viewportFraction: 1,
+                enlargeCenterPage: true,
+                enlargeStrategy: CenterPageEnlargeStrategy.scale,
+              ),
+            ),
+          ),
+          GestureDetector(
+            child: Icon(Icons.navigate_next, color: palePink, size: 48),
+            onTap: () {
+              _carouselController.nextPage();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildSponsorsUI(BuildContext context) {
+    return Align(
+      alignment: Alignment.topCenter,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          GestureDetector(
+            child: Icon(Icons.navigate_before, color: palePink, size: 48),
+            onTap: () {
+              _carouselController.previousPage();
+            },
+          ),
+          Expanded(
+            child: CarouselSlider(
+              carouselController: _carouselController,
+              items: [
+                SpeakerCard(),
+                SpeakerCard(),
+                SpeakerCard(),
+                SpeakerCard(),
+              ],
+              options: CarouselOptions(
+                autoPlay: false,
+                initialPage: 0,
+                height: MediaQuery.of(context).size.height * 4 / 7,
+                viewportFraction: 1,
+                enlargeCenterPage: true,
+                enlargeStrategy: CenterPageEnlargeStrategy.scale,
+              ),
+            ),
+          ),
+          GestureDetector(
+            child: Icon(Icons.navigate_next, color: palePink, size: 48),
+            onTap: () {
+              _carouselController.nextPage();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -51,40 +135,16 @@ class _SpeakersScreenState extends State<SpeakersScreen>
               ],
             ),
           ),
-          Row(
-            children: [
-              GestureDetector(
-                child: Icon(Icons.navigate_before, color: palePink, size: 48),
-                onTap: () {
-                  _carouselController.previousPage();
-                },
+          SizedBox(height: 8),
+          Expanded(
+            child: Container(
+              alignment: Alignment.topCenter,
+              child: TabBarView(
+                controller: _tabController,
+                physics: NeverScrollableScrollPhysics(),
+                children: [buildSpeakersUI(context), buildSponsorsUI(context)],
               ),
-              Expanded(
-                child: CarouselSlider(
-                  carouselController: _carouselController,
-                  items: [
-                    SpeakerCard(),
-                    SpeakerCard(),
-                    SpeakerCard(),
-                    SpeakerCard(),
-                  ],
-                  options: CarouselOptions(
-                    autoPlay: false,
-                    initialPage: 0,
-                    height: MediaQuery.of(context).size.height * 4 / 7,
-                    viewportFraction: 1,
-                    enlargeCenterPage: true,
-                    enlargeStrategy: CenterPageEnlargeStrategy.scale,
-                  ),
-                ),
-              ),
-              GestureDetector(
-                child: Icon(Icons.navigate_next, color: palePink, size: 48),
-                onTap: () {
-                  _carouselController.nextPage();
-                },
-              ),
-            ],
+            ),
           ),
         ],
       ),
