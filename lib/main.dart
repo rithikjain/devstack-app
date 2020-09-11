@@ -2,9 +2,12 @@ import 'package:devtalks/src/presentation/screens/auth/auth_screen.dart';
 import 'package:devtalks/src/presentation/screens/landing/landing_screen.dart';
 import 'package:devtalks/src/presentation/screens/main/base_screen.dart';
 import 'package:devtalks/src/presentation/themes/themes.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
