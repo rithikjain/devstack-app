@@ -34,23 +34,28 @@ class LandingScreen extends StatelessWidget {
                     style: TextStyle(color: Colors.white),
                   ),
                   SizedBox(height: 25),
-                  RichText(
-                    text: TextSpan(
-                        text: "DSC ",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
-                        children: [
-                          TextSpan(
-                            text: "VIT",
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      RichText(
+                        text: TextSpan(
+                            text: "DSC ",
                             style: TextStyle(
                               color: Colors.white,
-                              fontWeight: FontWeight.bold,
                               fontSize: 20,
                             ),
-                          ),
-                        ]),
+                            children: [
+                              TextSpan(
+                                text: "VIT",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ]),
+                      ),
+                    ],
                   ),
                   SizedBox(height: 80),
                   MaterialButton(

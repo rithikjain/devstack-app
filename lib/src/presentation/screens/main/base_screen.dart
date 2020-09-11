@@ -28,8 +28,11 @@ class _BaseScreenState extends State<BaseScreen> {
       appBar: AppBar(
         leading: Container(),
         elevation: 0,
-        title: Text("DEVSTACK"),
         centerTitle: true,
+        title: Container(
+          width: 120,
+          child: Image.asset("assets/images/devstack.png"),
+        ),
       ),
       body: Stack(
         children: [

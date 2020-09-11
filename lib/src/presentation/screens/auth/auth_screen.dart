@@ -14,6 +14,15 @@ class AuthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: Container(),
+        elevation: 0,
+        centerTitle: true,
+        title: Container(
+          width: 120,
+          child: Image.asset("assets/images/devstack.png"),
+        ),
+      ),
       body: Stack(
         children: [
           BgGradient(),
