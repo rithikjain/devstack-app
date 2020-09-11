@@ -2,6 +2,7 @@ import 'package:devtalks/src/presentation/animations/show_up.dart';
 import 'package:devtalks/src/presentation/screens/main/base_screen.dart';
 import 'package:devtalks/src/presentation/themes/text_styles.dart';
 import 'package:devtalks/src/presentation/widgets/bg_gradient.dart';
+import 'package:devtalks/src/utils/shared_prefs.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -40,6 +41,7 @@ class _AuthScreenState extends State<AuthScreen> {
       if (user != null) {
         final User currentUser = _auth.currentUser;
         print(currentUser.email);
+        SharedPrefs.setLoggedInStatus(true);
         Navigator.pushNamedAndRemoveUntil(
           context,
           BaseScreen.routename,
