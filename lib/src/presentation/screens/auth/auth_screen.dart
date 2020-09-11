@@ -7,9 +7,6 @@ import 'package:flutter/material.dart';
 
 class AuthScreen extends StatelessWidget {
   static const routename = "/auth";
-  final _formKey = GlobalKey<FormState>();
-  final TextEditingController _useridController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,61 +32,32 @@ class AuthScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Form(
-                    key: _formKey,
-                    child: Column(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.symmetric(
-                            horizontal: 64,
-                            vertical: 16,
+                  Container(
+                    height: 50,
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    child: RaisedButton(
+                      onPressed: () {},
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text('Login with Google'),
+                          SizedBox(
+                            width: 20,
                           ),
-                          child: TextFormField(
-                            keyboardType: TextInputType.text,
-                            controller: _useridController,
-                            decoration: InputDecoration(
-                              hintText: 'User ID',
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.symmetric(
-                            horizontal: 64,
-                            vertical: 16,
-                          ),
-                          child: TextFormField(
-                            keyboardType: TextInputType.text,
-                            controller: _passwordController,
-                            decoration: InputDecoration(
-                              hintText: 'Password',
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 50),
-                  MaterialButton(
-                    child: Padding(
-                      padding: EdgeInsets.all(18),
-                      child: Text(
-                        "Let's go!",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        ),
+                          Image.network(
+                            "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1004px-Google_%22G%22_Logo.svg.png",
+                            fit: BoxFit.contain,
+                            height: 24,
+                          )
+                        ],
                       ),
                     ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: borderRadius12,
-                    ),
-                    onPressed: () {
-                      Navigator.pushNamed(context, BaseScreen.routename);
-                    },
-                    color: palePink,
                   ),
-                  SizedBox(height: 50),
+                  SizedBox(height: 100),
                   RichText(
                     text: TextSpan(
                       text: 'Click here to know about ',
