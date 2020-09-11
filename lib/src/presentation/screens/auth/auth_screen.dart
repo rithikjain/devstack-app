@@ -1,12 +1,17 @@
 import 'package:devtalks/src/presentation/animations/show_up.dart';
-import 'package:devtalks/src/presentation/screens/main/base_screen.dart';
 import 'package:devtalks/src/presentation/themes/text_styles.dart';
-import 'package:devtalks/src/presentation/themes/themes.dart';
 import 'package:devtalks/src/presentation/widgets/bg_gradient.dart';
 import 'package:flutter/material.dart';
 
-class AuthScreen extends StatelessWidget {
+class AuthScreen extends StatefulWidget {
   static const routename = "/auth";
+
+  @override
+  _AuthScreenState createState() => _AuthScreenState();
+}
+
+class _AuthScreenState extends State<AuthScreen> {
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -34,27 +39,33 @@ class AuthScreen extends StatelessWidget {
                 children: [
                   Container(
                     height: 50,
-                    width: MediaQuery.of(context).size.width * 0.6,
+                    width: MediaQuery.of(context).size.width * 0.5,
                     child: RaisedButton(
                       onPressed: () {},
                       color: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text('Login with Google'),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Image.network(
-                            "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1004px-Google_%22G%22_Logo.svg.png",
-                            fit: BoxFit.contain,
-                            height: 24,
-                          )
-                        ],
-                      ),
+                      child: (!_isLoading)
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text('Login with Google'),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Image.network(
+                                  "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1004px-Google_%22G%22_Logo.svg.png",
+                                  fit: BoxFit.contain,
+                                  height: 24,
+                                )
+                              ],
+                            )
+                          : Container(
+                              height: 35,
+                              width: 35,
+                              child: CircularProgressIndicator(),
+                            ),
                     ),
                   ),
                   SizedBox(height: 100),
