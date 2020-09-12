@@ -41,7 +41,7 @@ class HomeScreen extends StatelessWidget {
           ),
           SizedBox(height: 20),
           StreamBuilder<QuerySnapshot>(
-            stream: _talks.snapshots(),
+            stream: _talks.snapshots(includeMetadataChanges: true),
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.hasError) {
                 return Center(child: Text("Something went wrong"));

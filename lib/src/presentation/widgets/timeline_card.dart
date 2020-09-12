@@ -24,7 +24,7 @@ class TimelineCard extends StatelessWidget {
           ],
         ),
         title: Text(
-          "Introduction",
+          talkName,
           style: TextStyle(
             color: darkBlue,
             fontWeight: FontWeight.bold,
@@ -32,7 +32,7 @@ class TimelineCard extends StatelessWidget {
           ),
         ),
         subtitle: Text(
-          "9:00AM - 10:00AM",
+          timings,
           style: TextStyle(
             color: darkBlue,
             fontSize: 14,
