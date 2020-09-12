@@ -1,4 +1,5 @@
 import 'package:devtalks/src/presentation/themes/themes.dart';
+import 'package:devtalks/src/presentation/widgets/question_card.dart';
 import 'package:flutter/material.dart';
 
 class QuestionsScreen extends StatelessWidget {
@@ -23,7 +24,14 @@ class QuestionsScreen extends StatelessWidget {
           ),
           SizedBox(height: 8),
           Expanded(
-            child: Container(),
+            child: ListView.builder(
+              itemBuilder: (context, index) => QuestionCard(
+                question: "What is DevStack",
+                description: "Devstack is an event oragnised by DSC VIT.",
+                upvotes: 10,
+              ),
+              itemCount: 5,
+            ),
           ),
         ],
       ),
