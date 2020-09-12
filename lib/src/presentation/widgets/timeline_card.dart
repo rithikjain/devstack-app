@@ -2,6 +2,11 @@ import 'package:devtalks/src/presentation/themes/themes.dart';
 import 'package:flutter/material.dart';
 
 class TimelineCard extends StatelessWidget {
+  final String talkName;
+  final String timings;
+
+  TimelineCard({this.talkName, this.timings});
+
   @override
   Widget build(BuildContext context) {
     return Container(

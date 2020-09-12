@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:devtalks/src/presentation/themes/themes.dart';
 import 'package:devtalks/src/presentation/widgets/timeline_card.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,8 @@ import 'package:flutter/material.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    CollectionReference _talks = FirebaseFirestore.instance.collection("talks");
+
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Column(
@@ -37,11 +40,30 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           SizedBox(height: 20),
-          Expanded(
-            child: ListView.builder(
-              itemBuilder: (context, index) => TimelineCard(),
-              itemCount: 5,
-            ),
+          StreamBuilder<QuerySnapshot>(
+            stream: _talks.snapshots(),
+            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.hasError) {
+                return Center(child: Text("Something went wrong"));
+              }
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              snapshot.data.docs.forEach((element) {
+                print(element.data());
+              });
+              return Expanded(
+                child: ListView.builder(
+                  itemBuilder: (context, index) => TimelineCard(
+                    talkName: snapshot.data.docs[index].data()["talkName"],
+                    timings: snapshot.data.docs[index].data()["talkTime"],
+                  ),
+                  itemCount: snapshot.data.docs.length,
+                ),
+              );
+            },
           ),
         ],
       ),
