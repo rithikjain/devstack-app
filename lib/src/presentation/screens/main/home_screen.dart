@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    CollectionReference _talks = FirebaseFirestore.instance.collection("talks");
+    Query _talks =
+        FirebaseFirestore.instance.collection("talks").orderBy("order");
 
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -47,9 +48,7 @@ class HomeScreen extends StatelessWidget {
                 return Center(child: Text("Something went wrong"));
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
+                return Container();
               }
               snapshot.data.docs.forEach((element) {
                 print(element.data());
