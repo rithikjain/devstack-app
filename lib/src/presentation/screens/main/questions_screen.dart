@@ -33,6 +33,7 @@ class QuestionsScreen extends StatelessWidget {
               itemCount: 5,
             ),
           ),
+          SizedBox(height: 8),
         ],
       ),
     );
