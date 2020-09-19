@@ -14,6 +14,28 @@ class QuestionsScreen extends StatelessWidget {
         .collection("questions")
         .orderBy("upvotes", descending: true);
 
+    Future<void> upVote(questionID) {
+      CollectionReference questions =
+          FirebaseFirestore.instance.collection("questions");
+      return questions.doc(questionID).update(
+        {
+          "upvotes": FieldValue.increment(1),
+          "usersUpvoted": FieldValue.arrayUnion([_userID]),
+        },
+      );
+    }
+
+    Future<void> cancelUpVote(questionID) {
+      CollectionReference questions =
+          FirebaseFirestore.instance.collection("questions");
+      return questions.doc(questionID).update(
+        {
+          "upvotes": FieldValue.increment(-1),
+          "usersUpvoted": FieldValue.arrayRemove([_userID]),
+        },
+      );
+    }
+
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Column(
@@ -42,7 +64,7 @@ class QuestionsScreen extends StatelessWidget {
                 return Container();
               }
               snapshot.data.docs.forEach((element) {
-                print(element.data());
+                print(element.id);
               });
               return Expanded(
                 child: ShowUp(
@@ -52,18 +74,16 @@ class QuestionsScreen extends StatelessWidget {
                       final question = snapshot.data.docs[index];
                       List<String> usersUpvoted =
                           List.from(question.data()["usersUpvoted"]);
-                      if (usersUpvoted.contains(_userID)) {
-                        print("Already Upvoted");
-                      }
+                      bool hasUserUpvoted = usersUpvoted.contains(_userID);
                       return QuestionCard(
                         question: question.data()["title"],
                         description: question.data()["description"],
                         upvotes: question.data()["upvotes"],
                         onUpvote: (question.data()["createdBy"] == _userID)
                             ? null
-                            : () {},
-                        isUpvoted: false,
-                        onCancelUpvote: () {},
+                            : () => upVote(question.id),
+                        isUpvoted: hasUserUpvoted,
+                        onCancelUpvote: () => cancelUpVote(question.id),
                       );
                     },
                     itemCount: snapshot.data.docs.length,
