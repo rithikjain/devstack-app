@@ -2,9 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:devtalks/src/presentation/animations/show_up.dart';
 import 'package:devtalks/src/presentation/themes/themes.dart';
 import 'package:devtalks/src/presentation/widgets/question_card.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class QuestionsScreen extends StatelessWidget {
+  final String _userID = FirebaseAuth.instance.currentUser.uid;
+
   @override
   Widget build(BuildContext context) {
     Query _questions = FirebaseFirestore.instance
@@ -45,12 +48,24 @@ class QuestionsScreen extends StatelessWidget {
                 child: ShowUp(
                   delay: Duration(milliseconds: 200),
                   child: ListView.builder(
-                    itemBuilder: (context, index) => QuestionCard(
-                      question: snapshot.data.docs[index].data()["title"],
-                      description:
-                          snapshot.data.docs[index].data()["description"],
-                      upvotes: snapshot.data.docs[index].data()["upvotes"],
-                    ),
+                    itemBuilder: (context, index) {
+                      final question = snapshot.data.docs[index];
+                      List<String> usersUpvoted =
+                          List.from(question.data()["usersUpvoted"]);
+                      if (usersUpvoted.contains(_userID)) {
+                        print("Already Upvoted");
+                      }
+                      return QuestionCard(
+                        question: question.data()["title"],
+                        description: question.data()["description"],
+                        upvotes: question.data()["upvotes"],
+                        onUpvote: (question.data()["createdBy"] == _userID)
+                            ? null
+                            : () {},
+                        isUpvoted: false,
+                        onCancelUpvote: () {},
+                      );
+                    },
                     itemCount: snapshot.data.docs.length,
                   ),
                 ),
