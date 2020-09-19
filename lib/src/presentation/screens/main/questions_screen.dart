@@ -38,6 +38,13 @@ class QuestionsScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.transparent,
+      floatingActionButton: Container(
+        margin: EdgeInsets.only(bottom: 56),
+        child: FloatingActionButton(
+          child: Icon(Icons.add, color: Colors.white),
+          onPressed: () {},
+        ),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
