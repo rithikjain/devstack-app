@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:devtalks/src/presentation/animations/show_up.dart';
 import 'package:devtalks/src/presentation/themes/themes.dart';
 import 'package:devtalks/src/presentation/widgets/timeline_card.dart';
 import 'package:flutter/material.dart';
@@ -54,12 +55,15 @@ class HomeScreen extends StatelessWidget {
                 print(element.data());
               });
               return Expanded(
-                child: ListView.builder(
-                  itemBuilder: (context, index) => TimelineCard(
-                    talkName: snapshot.data.docs[index].data()["talkName"],
-                    timings: snapshot.data.docs[index].data()["talkTime"],
+                child: ShowUp(
+                  delay: Duration(milliseconds: 200),
+                  child: ListView.builder(
+                    itemBuilder: (context, index) => TimelineCard(
+                      talkName: snapshot.data.docs[index].data()["talkName"],
+                      timings: snapshot.data.docs[index].data()["talkTime"],
+                    ),
+                    itemCount: snapshot.data.docs.length,
                   ),
-                  itemCount: snapshot.data.docs.length,
                 ),
               );
             },
