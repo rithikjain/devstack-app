@@ -28,12 +28,22 @@ class QuestionsScreen extends StatelessWidget {
     Future<void> cancelUpVote(questionID) {
       CollectionReference questions =
           FirebaseFirestore.instance.collection("questions");
-      return questions.doc(questionID).update(
-        {
-          "upvotes": FieldValue.increment(-1),
-          "usersUpvoted": FieldValue.arrayRemove([_userID]),
-        },
-      );
+      return questions.doc(questionID).update({
+        "upvotes": FieldValue.increment(-1),
+        "usersUpvoted": FieldValue.arrayRemove([_userID]),
+      });
+    }
+
+    Future<void> addQuestion(String title, String desc) {
+      CollectionReference questions =
+          FirebaseFirestore.instance.collection("questions");
+      return questions.add({
+        "createdBy": _userID,
+        "description": desc,
+        "title": title,
+        "upvotes": 0,
+        "usersUpvoted": [],
+      });
     }
 
     return Scaffold(
@@ -42,7 +52,9 @@ class QuestionsScreen extends StatelessWidget {
         margin: EdgeInsets.only(bottom: 56),
         child: FloatingActionButton(
           child: Icon(Icons.add, color: Colors.white),
-          onPressed: () {},
+          onPressed: () async {
+            addQuestion("Title", "Description");
+          },
         ),
       ),
       body: Column(
