@@ -90,7 +90,7 @@ class QuestionsScreen extends StatelessWidget {
                         isUpvoted: hasUserUpvoted,
                         onCancelUpvote: () => cancelUpVote(question.id),
                         showDelete: question.data()["createdBy"] == _userID,
-                        onDelete: () {},
+                        questionID: question.id,
                       );
                     },
                     itemCount: snapshot.data.docs.length,

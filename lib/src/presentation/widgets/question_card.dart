@@ -1,4 +1,5 @@
 import 'package:devtalks/src/presentation/themes/themes.dart';
+import 'package:devtalks/src/presentation/widgets/delete_dialog.dart';
 import 'package:flutter/material.dart';
 
 class QuestionCard extends StatelessWidget {
@@ -7,7 +8,7 @@ class QuestionCard extends StatelessWidget {
   final int upvotes;
   final bool isUpvoted;
   final bool showDelete;
-  final Function onDelete;
+  final String questionID;
   final Function onCancelUpvote;
   final Function onUpvote;
 
@@ -19,7 +20,7 @@ class QuestionCard extends StatelessWidget {
     this.onCancelUpvote,
     this.isUpvoted,
     this.showDelete,
-    this.onDelete,
+    this.questionID,
   });
 
   @override
@@ -110,12 +111,18 @@ class QuestionCard extends StatelessWidget {
                                     width: 2,
                                   ),
                                 ),
-                          SizedBox(width: 8),
+                          SizedBox(width: 12),
                           Visibility(
                             visible: showDelete,
                             child: InkWell(
                               child: Icon(Icons.delete, color: Colors.red[700]),
-                              onTap: onDelete,
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) =>
+                                      DeleteDialog(questionID),
+                                );
+                              },
                             ),
                           ),
                         ],
