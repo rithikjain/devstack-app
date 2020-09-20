@@ -26,94 +26,96 @@ class AddQuestionDialog extends StatelessWidget {
     return Dialog(
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 24),
-            Container(
-              child: Text(
-                "Ask a question",
-                style: BlueText.copyWith(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 24),
+              Container(
+                child: Text(
+                  "Ask a question",
+                  style: BlueText.copyWith(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 24),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 4),
-              child: TextField(
-                controller: _titleController,
-                maxLength: 40,
-                decoration: InputDecoration(
-                  hintText: "Title",
+              SizedBox(height: 24),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 4),
+                child: TextField(
+                  controller: _titleController,
+                  maxLength: 40,
+                  decoration: InputDecoration(
+                    hintText: "Title",
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 4),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 4),
-              child: TextField(
-                controller: _descController,
-                maxLines: 3,
-                maxLength: 100,
-                textInputAction: TextInputAction.done,
-                decoration: InputDecoration(
-                  hintText: "Description",
+              SizedBox(height: 4),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 4),
+                child: TextField(
+                  controller: _descController,
+                  maxLines: 3,
+                  maxLength: 100,
+                  textInputAction: TextInputAction.done,
+                  decoration: InputDecoration(
+                    hintText: "Description",
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 24),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                OutlineButton(
-                  child: Text(
-                    "Cancel",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
+              SizedBox(height: 24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  OutlineButton(
+                    child: Text(
+                      "Cancel",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    highlightedBorderColor: Colors.red,
+                    textColor: Colors.red,
+                    borderSide: BorderSide(
+                      color: Colors.red,
+                      width: 2,
                     ),
                   ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  highlightedBorderColor: Colors.red,
-                  textColor: Colors.red,
-                  borderSide: BorderSide(
-                    color: Colors.red,
-                    width: 2,
-                  ),
-                ),
-                SizedBox(width: 16),
-                OutlineButton(
-                  child: Text(
-                    "Add",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                  SizedBox(width: 16),
+                  OutlineButton(
+                    child: Text(
+                      "Add",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  onPressed: () {
-                    addQuestion();
-                    Navigator.of(context).pop();
-                  },
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  textColor: Colors.green,
-                  highlightedBorderColor: Colors.green,
-                  borderSide: BorderSide(
-                    color: Colors.green,
-                    width: 2,
-                  ),
-                )
-              ],
-            ),
-            SizedBox(height: 24),
-          ],
+                    onPressed: () {
+                      addQuestion();
+                      Navigator.of(context).pop();
+                    },
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    textColor: Colors.green,
+                    highlightedBorderColor: Colors.green,
+                    borderSide: BorderSide(
+                      color: Colors.green,
+                      width: 2,
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(height: 24),
+            ],
+          ),
         ),
       ),
     );
