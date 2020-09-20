@@ -97,7 +97,6 @@ class QuestionsScreen extends StatelessWidget {
               );
             },
           ),
-          SizedBox(height: 8),
         ],
       ),
     );
