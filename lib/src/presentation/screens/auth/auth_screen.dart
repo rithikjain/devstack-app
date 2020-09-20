@@ -124,8 +124,8 @@ class _AuthScreenState extends State<AuthScreen> {
                                           SizedBox(
                                             width: 20,
                                           ),
-                                          Image.network(
-                                            "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1004px-Google_%22G%22_Logo.svg.png",
+                                          Image.asset(
+                                            "assets/images/g_logo.png",
                                             fit: BoxFit.contain,
                                             height: 24,
                                           )
