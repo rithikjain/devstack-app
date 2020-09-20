@@ -70,6 +70,7 @@ class QuestionCard extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(14),
                               ),
                               textColor: Colors.green,
+                              highlightedBorderColor: Colors.green,
                               borderSide: BorderSide(
                                 color: Colors.green,
                                 width: 2,
@@ -97,6 +98,7 @@ class QuestionCard extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(14),
                               ),
                               textColor: Colors.red,
+                              highlightedBorderColor: Colors.red,
                               borderSide: BorderSide(
                                 color: Colors.red,
                                 width: 2,

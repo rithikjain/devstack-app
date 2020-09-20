@@ -7,11 +7,12 @@ const lightGrey = Color(0xFFF3F3F3);
 
 final InputDecorationTheme inputTheme = InputDecorationTheme(
   border: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(8),
-    borderSide: BorderSide.none,
+    borderRadius: BorderRadius.circular(24),
+    borderSide: BorderSide(
+      color: Colors.grey,
+      width: 1,
+    ),
   ),
-  fillColor: lightGrey,
-  filled: true,
   hintStyle: TextStyle(
     color: Colors.grey,
     fontFamily: 'Metropolis',

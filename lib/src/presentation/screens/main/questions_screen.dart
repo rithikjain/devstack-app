@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:devtalks/src/presentation/animations/show_up.dart';
 import 'package:devtalks/src/presentation/themes/themes.dart';
+import 'package:devtalks/src/presentation/widgets/add_question_dialog.dart';
 import 'package:devtalks/src/presentation/widgets/question_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -34,24 +35,16 @@ class QuestionsScreen extends StatelessWidget {
       });
     }
 
-    Future<void> addQuestion(String title, String desc) {
-      CollectionReference questions =
-          FirebaseFirestore.instance.collection("questions");
-      return questions.add({
-        "createdBy": _userID,
-        "description": desc,
-        "title": title,
-        "upvotes": 0,
-        "usersUpvoted": [],
-      });
-    }
-
     return Scaffold(
       backgroundColor: Colors.transparent,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add, color: Colors.white),
-        onPressed: () async {
-          addQuestion("Title", "Description");
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) => AddQuestionDialog(),
+            barrierDismissible: false,
+          );
         },
       ),
       body: Column(
@@ -78,9 +71,6 @@ class QuestionsScreen extends StatelessWidget {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Container();
               }
-              snapshot.data.docs.forEach((element) {
-                print(element.id);
-              });
               return Expanded(
                 child: ShowUp(
                   delay: Duration(milliseconds: 200),
