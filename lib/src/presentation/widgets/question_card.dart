@@ -6,6 +6,8 @@ class QuestionCard extends StatelessWidget {
   final String description;
   final int upvotes;
   final bool isUpvoted;
+  final bool showDelete;
+  final Function onDelete;
   final Function onCancelUpvote;
   final Function onUpvote;
 
@@ -16,6 +18,8 @@ class QuestionCard extends StatelessWidget {
     this.onUpvote,
     this.onCancelUpvote,
     this.isUpvoted,
+    this.showDelete,
+    this.onDelete,
   });
 
   @override
@@ -57,53 +61,65 @@ class QuestionCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      (!isUpvoted)
-                          ? OutlineButton(
-                              child: Text(
-                                "Upvote",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              onPressed: onUpvote,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(14),
-                              ),
-                              textColor: Colors.green,
-                              highlightedBorderColor: Colors.green,
-                              borderSide: BorderSide(
-                                color: Colors.green,
-                                width: 2,
-                              ),
-                            )
-                          : OutlineButton(
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.cancel,
-                                    color: Colors.red,
-                                    size: 18,
-                                  ),
-                                  SizedBox(width: 8),
-                                  Text(
+                      Row(
+                        children: [
+                          (!isUpvoted)
+                              ? OutlineButton(
+                                  child: Text(
                                     "Upvote",
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                ],
-                              ),
-                              onPressed: onCancelUpvote,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(14),
-                              ),
-                              textColor: Colors.red,
-                              highlightedBorderColor: Colors.red,
-                              borderSide: BorderSide(
-                                color: Colors.red,
-                                width: 2,
-                              ),
+                                  onPressed: onUpvote,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(14),
+                                  ),
+                                  textColor: Colors.green,
+                                  highlightedBorderColor: Colors.green,
+                                  borderSide: BorderSide(
+                                    color: Colors.green,
+                                    width: 2,
+                                  ),
+                                )
+                              : OutlineButton(
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.cancel,
+                                        color: Colors.red,
+                                        size: 18,
+                                      ),
+                                      SizedBox(width: 8),
+                                      Text(
+                                        "Upvote",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  onPressed: onCancelUpvote,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(14),
+                                  ),
+                                  textColor: Colors.red,
+                                  highlightedBorderColor: Colors.red,
+                                  borderSide: BorderSide(
+                                    color: Colors.red,
+                                    width: 2,
+                                  ),
+                                ),
+                          SizedBox(width: 8),
+                          Visibility(
+                            visible: showDelete,
+                            child: InkWell(
+                              child: Icon(Icons.delete, color: Colors.red[700]),
+                              onTap: onDelete,
                             ),
+                          ),
+                        ],
+                      ),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [

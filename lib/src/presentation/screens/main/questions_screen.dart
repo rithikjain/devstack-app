@@ -89,6 +89,8 @@ class QuestionsScreen extends StatelessWidget {
                             : () => upVote(question.id),
                         isUpvoted: hasUserUpvoted,
                         onCancelUpvote: () => cancelUpVote(question.id),
+                        showDelete: question.data()["createdBy"] == _userID,
+                        onDelete: () {},
                       );
                     },
                     itemCount: snapshot.data.docs.length,
