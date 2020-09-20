@@ -65,6 +65,11 @@ class _LandingScreenState extends State<LandingScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Image.asset(
+                      "assets/images/dsc_logo_icon.png",
+                      height: 15,
+                    ),
+                    SizedBox(width: 8),
                     RichText(
                       text: TextSpan(
                           text: "DSC ",
