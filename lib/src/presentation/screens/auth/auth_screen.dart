@@ -73,15 +73,6 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Container(),
-        elevation: 0,
-        centerTitle: true,
-        title: Container(
-          width: 120,
-          child: Image.asset("assets/images/devstack.png"),
-        ),
-      ),
       body: Builder(
         builder: (context) => Stack(
           children: [
@@ -91,65 +82,80 @@ class _AuthScreenState extends State<AuthScreen> {
               height: double.infinity,
               child: ShowUp(
                 delay: Duration(milliseconds: 600),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 50,
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      child: RaisedButton(
-                        onPressed: () async {
-                          if (!_isLoading) {
-                            await _signInWithGoogle(context);
-                          }
-                        },
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: (!_isLoading)
-                            ? Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Text('Login with Google'),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Image.network(
-                                    "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1004px-Google_%22G%22_Logo.svg.png",
-                                    fit: BoxFit.contain,
-                                    height: 24,
-                                  )
-                                ],
-                              )
-                            : Container(
-                                height: 35,
-                                width: 35,
-                                child: CircularProgressIndicator(),
+                child: SafeArea(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(height: 40),
+                      Container(
+                        width: 120,
+                        child: Image.asset("assets/images/devstack.png"),
+                      ),
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 50,
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              child: RaisedButton(
+                                onPressed: () async {
+                                  if (!_isLoading) {
+                                    await _signInWithGoogle(context);
+                                  }
+                                },
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: (!_isLoading)
+                                    ? Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Text('Login with Google'),
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Image.network(
+                                            "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1004px-Google_%22G%22_Logo.svg.png",
+                                            fit: BoxFit.contain,
+                                            height: 24,
+                                          )
+                                        ],
+                                      )
+                                    : Container(
+                                        height: 35,
+                                        width: 35,
+                                        child: CircularProgressIndicator(),
+                                      ),
                               ),
-                      ),
-                    ),
-                    SizedBox(height: 100),
-                    RichText(
-                      text: TextSpan(
-                        text: 'Click here to know about ',
-                        style: WhiteText.copyWith(
-                          fontSize: 17,
-                          decoration: TextDecoration.underline,
-                        ),
-                        children: [
-                          TextSpan(
-                            text: 'DevTalks',
-                            style: PalePinkText.copyWith(
-                              fontWeight: FontWeight.bold,
-                              decoration: TextDecoration.underline,
                             ),
-                          ),
-                        ],
+                            SizedBox(height: 100),
+                            RichText(
+                              text: TextSpan(
+                                text: 'Click here to know about ',
+                                style: WhiteText.copyWith(
+                                  fontSize: 17,
+                                  decoration: TextDecoration.underline,
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: 'DevTalks',
+                                    style: PalePinkText.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
