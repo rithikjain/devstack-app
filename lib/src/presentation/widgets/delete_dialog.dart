@@ -22,27 +22,30 @@ class DeleteDialog extends StatelessWidget {
         ),
       ),
       actions: [
-        OutlineButton(
-          child: Container(
-            padding: EdgeInsets.all(8),
-            child: Text(
-              "Cancel",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 8),
+          child: OutlineButton(
+            child: Container(
+              padding: EdgeInsets.all(8),
+              child: Text(
+                "Cancel",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(14),
-          ),
-          textColor: Colors.grey[800],
-          highlightedBorderColor: Colors.grey[800],
-          borderSide: BorderSide(
-            color: Colors.grey[800],
-            width: 2,
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(14),
+            ),
+            textColor: Colors.grey[800],
+            highlightedBorderColor: Colors.grey[800],
+            borderSide: BorderSide(
+              color: Colors.grey[800],
+              width: 2,
+            ),
           ),
         ),
         OutlineButton(
