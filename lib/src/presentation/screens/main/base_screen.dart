@@ -18,7 +18,6 @@ class _BaseScreenState extends State<BaseScreen> {
   List<Widget> screens = [
     HomeScreen(),
     SpeakersScreen(),
-    Container(),
     QuestionsScreen(),
   ];
 
@@ -60,10 +59,6 @@ class _BaseScreenState extends State<BaseScreen> {
             BottomNavigationBarItem(
               icon: Icon(Icons.mic),
               title: Text("Speakers"),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.code),
-              title: Text("QR Code"),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.help),
