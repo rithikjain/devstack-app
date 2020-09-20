@@ -88,9 +88,15 @@ class _AuthScreenState extends State<AuthScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(height: 40),
-                      Container(
-                        width: 120,
-                        child: Image.asset("assets/images/devstack.png"),
+                      Hero(
+                        tag: "logo",
+                        child: Material(
+                          color: Colors.transparent,
+                          child: Container(
+                            width: 120,
+                            child: Image.asset("assets/images/devstack.png"),
+                          ),
+                        ),
                       ),
                       Expanded(
                         child: Column(

@@ -44,11 +44,17 @@ class _LandingScreenState extends State<LandingScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  alignment: Alignment.center,
-                  margin: EdgeInsets.symmetric(horizontal: 32),
-                  width: 200,
-                  child: Image.asset("assets/images/logowithtext.png"),
+                Hero(
+                  tag: "logo",
+                  child: Material(
+                    color: Colors.transparent,
+                    child: Container(
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.symmetric(horizontal: 32),
+                      width: 200,
+                      child: Image.asset("assets/images/logowithtext.png"),
+                    ),
+                  ),
                 ),
                 SizedBox(height: 25),
                 Text(

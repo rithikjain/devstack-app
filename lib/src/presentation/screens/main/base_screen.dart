@@ -31,9 +31,15 @@ class _BaseScreenState extends State<BaseScreen> {
             child: Column(
               children: [
                 SizedBox(height: 40),
-                Container(
-                  width: 120,
-                  child: Image.asset("assets/images/devstack.png"),
+                Hero(
+                  tag: "logo",
+                  child: Material(
+                    color: Colors.transparent,
+                    child: Container(
+                      width: 120,
+                      child: Image.asset("assets/images/devstack.png"),
+                    ),
+                  ),
                 ),
                 Expanded(child: screens[_currIndex]),
               ],
