@@ -20,19 +20,12 @@ class _SpeakersScreenState extends State<SpeakersScreen>
   }
 
   Widget buildSpeakersUI(BuildContext context) {
-    return Align(
-      alignment: Alignment.topCenter,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          GestureDetector(
-            child: Icon(Icons.navigate_before, color: palePink, size: 48),
-            onTap: () {
-              _carouselController.previousPage();
-            },
-          ),
-          Expanded(
-            child: CarouselSlider(
+    return Column(
+      children: [
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            CarouselSlider(
               carouselController: _carouselController,
               items: [
                 SpeakerCard(),
@@ -44,20 +37,65 @@ class _SpeakersScreenState extends State<SpeakersScreen>
                 autoPlay: false,
                 initialPage: 0,
                 height: MediaQuery.of(context).size.height * 4 / 7,
-                viewportFraction: 1,
+                viewportFraction: 0.8,
                 enlargeCenterPage: true,
                 enlargeStrategy: CenterPageEnlargeStrategy.scale,
               ),
             ),
-          ),
-          GestureDetector(
-            child: Icon(Icons.navigate_next, color: palePink, size: 48),
-            onTap: () {
-              _carouselController.nextPage();
-            },
-          ),
-        ],
-      ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 8),
+              alignment: Alignment.centerLeft,
+              child: Material(
+                shape: CircleBorder(),
+                elevation: 16,
+                color: lightBlue,
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(50),
+                  splashColor: darkBlue,
+                  child: SizedBox(
+                    width: 48,
+                    height: 48,
+                    child: Icon(
+                      Icons.navigate_before,
+                      color: palePink,
+                      size: 48,
+                    ),
+                  ),
+                  onTap: () {
+                    _carouselController.previousPage();
+                  },
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 8),
+              alignment: Alignment.centerRight,
+              child: Material(
+                shape: CircleBorder(),
+                elevation: 16,
+                color: lightBlue,
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(50),
+                  splashColor: darkBlue,
+                  child: SizedBox(
+                    width: 48,
+                    height: 48,
+                    child: Icon(
+                      Icons.navigate_next,
+                      color: palePink,
+                      size: 48,
+                    ),
+                  ),
+                  onTap: () {
+                    _carouselController.nextPage();
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+        Expanded(child: Container()),
+      ],
     );
   }
 
