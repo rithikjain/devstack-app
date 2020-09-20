@@ -69,7 +69,6 @@ class QuestionsScreen extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 8),
           StreamBuilder<QuerySnapshot>(
             stream: _questions.snapshots(includeMetadataChanges: true),
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {

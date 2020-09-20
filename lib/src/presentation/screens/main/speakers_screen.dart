@@ -105,49 +105,44 @@ class _SpeakersScreenState extends State<SpeakersScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TabBar(
-                    controller: _tabController,
-                    tabs: [
-                      Tab(text: 'Speakers'),
-                      Tab(text: 'Sponsors'),
-                    ],
-                    indicatorSize: TabBarIndicatorSize.label,
-                    indicatorWeight: 4,
-                    labelColor: palePink,
-                    unselectedLabelColor: Colors.white54,
-                    labelStyle: TextStyle(
-                      fontSize: 19,
-                      fontWeight: FontWeight.bold,
-                    ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+          child: Row(
+            children: [
+              Expanded(
+                child: TabBar(
+                  controller: _tabController,
+                  tabs: [
+                    Tab(text: 'Speakers'),
+                    Tab(text: 'Sponsors'),
+                  ],
+                  indicatorSize: TabBarIndicatorSize.label,
+                  indicatorWeight: 4,
+                  labelColor: palePink,
+                  unselectedLabelColor: Colors.white54,
+                  labelStyle: TextStyle(
+                    fontSize: 19,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ],
-            ),
-          ),
-          SizedBox(height: 8),
-          Expanded(
-            child: Container(
-              alignment: Alignment.topCenter,
-              child: TabBarView(
-                controller: _tabController,
-                physics: NeverScrollableScrollPhysics(),
-                children: [buildSpeakersUI(context), buildSponsorsUI(context)],
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+        ),
+        SizedBox(height: 8),
+        Expanded(
+          child: TabBarView(
+            controller: _tabController,
+            physics: NeverScrollableScrollPhysics(),
+            children: [buildSpeakersUI(context), buildSponsorsUI(context)],
+          ),
+        ),
+        SizedBox(height: 8),
+      ],
     );
   }
 }

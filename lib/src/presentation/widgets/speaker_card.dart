@@ -10,13 +10,12 @@ class SpeakerCard extends StatelessWidget {
       child: ClipRRect(
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 16),
-          height: MediaQuery.of(context).size.height * 4 / 7,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                margin: EdgeInsets.symmetric(vertical: 16),
+                margin: EdgeInsets.only(bottom: 16),
                 height: 100,
                 child: ClipOval(
                   child: Image.asset("assets/images/Profile4.png"),
@@ -33,10 +32,13 @@ class SpeakerCard extends StatelessWidget {
                 style: BlueText,
               ),
               SizedBox(height: 12),
-              Text(
-                "An enthusiastic web developer, who started her career at the age of 16. Now working at Philips, India.",
-                style: TextStyle(fontSize: 16),
-                textAlign: TextAlign.center,
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 32),
+                child: Text(
+                  "An enthusiastic web developer, who started her career at the age of 16. Now working at Philips, India.",
+                  style: TextStyle(fontSize: 16),
+                  textAlign: TextAlign.center,
+                ),
               ),
               SizedBox(height: 24),
               Row(
@@ -56,7 +58,6 @@ class SpeakerCard extends StatelessWidget {
                   Text("email@gmail.com", style: BlueText),
                 ],
               ),
-              SizedBox(height: 30),
             ],
           ),
         ),
