@@ -23,10 +23,13 @@ class DeleteDialog extends StatelessWidget {
       ),
       actions: [
         OutlineButton(
-          child: Text(
-            "Cancel",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
+          child: Container(
+            padding: EdgeInsets.all(8),
+            child: Text(
+              "Cancel",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           onPressed: () {
@@ -43,10 +46,13 @@ class DeleteDialog extends StatelessWidget {
           ),
         ),
         OutlineButton(
-          child: Text(
-            "Delete",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
+          child: Container(
+            padding: EdgeInsets.all(8),
+            child: Text(
+              "Delete",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           onPressed: () {
