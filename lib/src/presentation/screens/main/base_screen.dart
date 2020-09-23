@@ -37,7 +37,7 @@ class _BaseScreenState extends State<BaseScreen> {
                     color: Colors.transparent,
                     child: Container(
                       width: 120,
-                      child: Image.asset("assets/images/devstack.png"),
+                      child: Image.asset("assets/images/devtalks.png"),
                     ),
                   ),
                 ),
