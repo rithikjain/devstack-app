@@ -50,10 +50,10 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: InkWell(
-              child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 16, vertical: 64),
-                alignment: Alignment.bottomCenter,
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 64),
+              alignment: Alignment.bottomCenter,
+              child: InkWell(
                 child: Text(
                   "Log Out? You will be missed!",
                   textAlign: TextAlign.center,
@@ -63,17 +63,17 @@ class ProfilePage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                onTap: () {
+                  FirebaseAuth.instance.signOut();
+                  GoogleSignIn().signOut();
+                  SharedPrefs.setLoggedInStatus(false);
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    AuthScreen.routename,
+                    (route) => false,
+                  );
+                },
               ),
-              onTap: () {
-                FirebaseAuth.instance.signOut();
-                GoogleSignIn().signOut();
-                SharedPrefs.setLoggedInStatus(false);
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  AuthScreen.routename,
-                  (route) => false,
-                );
-              },
             ),
           ),
         ],
