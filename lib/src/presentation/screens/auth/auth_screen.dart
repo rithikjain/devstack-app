@@ -139,24 +139,6 @@ class _AuthScreenState extends State<AuthScreen> {
                               ),
                             ),
                             SizedBox(height: 100),
-                            RichText(
-                              text: TextSpan(
-                                text: 'Click here to know about ',
-                                style: WhiteText.copyWith(
-                                  fontSize: 17,
-                                  decoration: TextDecoration.underline,
-                                ),
-                                children: [
-                                  TextSpan(
-                                    text: 'DevTalks',
-                                    style: PalePinkText.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      decoration: TextDecoration.underline,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
                           ],
                         ),
                       ),
