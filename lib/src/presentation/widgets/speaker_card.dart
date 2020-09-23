@@ -36,10 +36,12 @@ class SpeakerCard extends StatelessWidget {
               Text(
                 speakerName,
                 style: BlackHeadingText,
+                textAlign: TextAlign.center,
               ),
               SizedBox(height: 4),
               Text(
                 speakerPosition,
+                textAlign: TextAlign.center,
                 style: BlueText.copyWith(fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 32),

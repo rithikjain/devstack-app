@@ -25,14 +25,14 @@ class SpeakersScreen extends StatelessWidget {
               speakerPosition: "Founder of Blue Astral",
               speakerImage: "assets/images/punitma.jpeg",
               speakerDescription:
-                  "Punitma is not only a dedicated SW Engineer. She has the people skills to get right to the heart of so many group issues to keep a team going.",
+                  "Punitma is not only a dedicated SW Engineer. She has the skills to win your hearts and the ability to lead a team!",
             ),
             SpeakerCard(
               speakerName: "Senthilkumar Murugesan",
               speakerPosition: "Co-Founder of JioVio healthcare",
               speakerImage: "assets/images/senthilkumar.jpeg",
               speakerDescription:
-                  "Senthilkumar has a great passion for innovating through technology to solve real-life problems. He has innovated in fields like wireless network, defence, maternal healthcare, and safety solutions and filed nearly 10+ patents for the same.",
+                  "Senthilkumar has a great passion for innovating through technology to solve real-life problems. He has innovated from fields like wireless network to safety solutions and filed nearly 10+ patents for the same.",
             ),
           ],
           options: CarouselOptions(
