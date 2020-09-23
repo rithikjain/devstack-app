@@ -79,25 +79,25 @@ class _AuthScreenState extends State<AuthScreen> {
             Container(
               width: double.infinity,
               height: double.infinity,
-              child: ShowUp(
-                delay: Duration(milliseconds: 600),
-                child: SafeArea(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(height: 40),
-                      Hero(
-                        tag: "logo",
-                        child: Material(
-                          color: Colors.transparent,
-                          child: Container(
-                            width: 120,
-                            child: Image.asset("assets/images/devstack.png"),
-                          ),
+              child: SafeArea(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 40),
+                    Hero(
+                      tag: "logo",
+                      child: Material(
+                        color: Colors.transparent,
+                        child: Container(
+                          width: 120,
+                          child: Image.asset("assets/images/devtalks.png"),
                         ),
                       ),
-                      Expanded(
+                    ),
+                    Expanded(
+                      child: ShowUp(
+                        delay: Duration(milliseconds: 600),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -141,8 +141,8 @@ class _AuthScreenState extends State<AuthScreen> {
                           ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
