@@ -36,10 +36,9 @@ class _BaseScreenState extends State<BaseScreen> {
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 32),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Container(),
                       Hero(
                         tag: "logo",
                         child: Material(
@@ -50,7 +49,6 @@ class _BaseScreenState extends State<BaseScreen> {
                           ),
                         ),
                       ),
-                      Icon(Icons.notifications, color: palePink, size: 24),
                     ],
                   ),
                 ),
