@@ -3,12 +3,7 @@ import 'package:devtalks/src/presentation/themes/themes.dart';
 import 'package:devtalks/src/presentation/widgets/speaker_card.dart';
 import 'package:flutter/material.dart';
 
-class SpeakersScreen extends StatefulWidget {
-  @override
-  _SpeakersScreenState createState() => _SpeakersScreenState();
-}
-
-class _SpeakersScreenState extends State<SpeakersScreen> {
+class SpeakersScreen extends StatelessWidget {
   final CarouselController _carouselController = CarouselController();
 
   Widget buildSpeakersUI(BuildContext context) {
@@ -26,7 +21,7 @@ class _SpeakersScreenState extends State<SpeakersScreen> {
           options: CarouselOptions(
             autoPlay: false,
             initialPage: 0,
-            height: MediaQuery.of(context).size.height * 4 / 7,
+            height: MediaQuery.of(context).size.height * 3 / 6,
             viewportFraction: 0.8,
             enlargeCenterPage: true,
             enlargeStrategy: CenterPageEnlargeStrategy.scale,
@@ -89,11 +84,24 @@ class _SpeakersScreenState extends State<SpeakersScreen> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        buildSpeakersUI(context),
-        SizedBox(height: 16),
+        SizedBox(height: 32),
+        Container(
+          margin: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+          child: Text(
+            "Speakers",
+            style: TextStyle(
+              color: palePink,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        Expanded(
+          child: buildSpeakersUI(context),
+        ),
+        SizedBox(height: 32),
       ],
     );
   }

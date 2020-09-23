@@ -1,5 +1,4 @@
 import 'package:devtalks/src/presentation/themes/text_styles.dart';
-import 'package:devtalks/src/presentation/themes/themes.dart';
 import 'package:flutter/material.dart';
 
 class SpeakerCard extends StatelessWidget {
@@ -41,23 +40,6 @@ class SpeakerCard extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 24),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.location_on, color: lightBlue),
-                  SizedBox(width: 4),
-                  Text("Technology Tower", style: BlueText),
-                ],
-              ),
-              SizedBox(height: 8),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.alternate_email, color: lightBlue),
-                  SizedBox(width: 4),
-                  Text("email@gmail.com", style: BlueText),
-                ],
-              ),
             ],
           ),
         ),
