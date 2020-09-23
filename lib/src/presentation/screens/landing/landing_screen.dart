@@ -15,7 +15,7 @@ class _LandingScreenState extends State<LandingScreen> {
   @override
   void initState() {
     super.initState();
-    _checkStatus();
+    //_checkStatus();
   }
 
   _checkStatus() async {
@@ -59,9 +59,12 @@ class _LandingScreenState extends State<LandingScreen> {
                 SizedBox(height: 25),
                 Text(
                   "by",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                SizedBox(height: 25),
+                SizedBox(height: 32),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
