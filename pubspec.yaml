@@ -30,6 +30,7 @@ dependencies:
   firebase_auth: ^0.18.0+1
   cloud_firestore: ^0.14.0+2
   shared_preferences: ^0.5.10
+  cached_network_image: ^2.3.2+1
 
 dev_dependencies:
   flutter_test:

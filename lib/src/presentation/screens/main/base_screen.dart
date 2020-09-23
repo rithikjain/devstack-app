@@ -1,4 +1,5 @@
 import 'package:devtalks/src/presentation/screens/main/home_screen.dart';
+import 'package:devtalks/src/presentation/screens/main/profile_page.dart';
 import 'package:devtalks/src/presentation/screens/main/questions_screen.dart';
 import 'package:devtalks/src/presentation/screens/main/speakers_screen.dart';
 import 'package:devtalks/src/presentation/themes/themes.dart';
@@ -19,6 +20,7 @@ class _BaseScreenState extends State<BaseScreen> {
     HomeScreen(),
     SpeakersScreen(),
     QuestionsScreen(),
+    ProfilePage(),
   ];
 
   @override
@@ -31,14 +33,25 @@ class _BaseScreenState extends State<BaseScreen> {
             child: Column(
               children: [
                 SizedBox(height: 40),
-                Hero(
-                  tag: "logo",
-                  child: Material(
-                    color: Colors.transparent,
-                    child: Container(
-                      width: 120,
-                      child: Image.asset("assets/images/devtalks.png"),
-                    ),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 32),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(),
+                      Hero(
+                        tag: "logo",
+                        child: Material(
+                          color: Colors.transparent,
+                          child: Container(
+                            width: 120,
+                            child: Image.asset("assets/images/devtalks.png"),
+                          ),
+                        ),
+                      ),
+                      Icon(Icons.notifications, color: palePink, size: 24),
+                    ],
                   ),
                 ),
                 Expanded(child: screens[_currIndex]),
@@ -71,6 +84,10 @@ class _BaseScreenState extends State<BaseScreen> {
             BottomNavigationBarItem(
               icon: Icon(Icons.help),
               title: Text("Questions"),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              title: Text("Profile"),
             ),
           ],
           onTap: (value) {
