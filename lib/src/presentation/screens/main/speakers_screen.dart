@@ -13,15 +13,32 @@ class SpeakersScreen extends StatelessWidget {
         CarouselSlider(
           carouselController: _carouselController,
           items: [
-            SpeakerCard(),
-            SpeakerCard(),
-            SpeakerCard(),
-            SpeakerCard(),
+            SpeakerCard(
+              speakerName: "Swapnil Borker",
+              speakerPosition: "Product Designer at CleverTap",
+              speakerImage: "assets/images/swapnil.jpeg",
+              speakerDescription:
+                  "Swapnil Borkar is a Product Designer and as his friends tell him, is really rude when it comes to Design feedback.",
+            ),
+            SpeakerCard(
+              speakerName: "Punitma Malhotra",
+              speakerPosition: "Founder of Blue Astral",
+              speakerImage: "assets/images/punitma.jpeg",
+              speakerDescription:
+                  "Punitma is not only a dedicated SW Engineer. She has the people skills to get right to the heart of so many group issues to keep a team going.",
+            ),
+            SpeakerCard(
+              speakerName: "Senthilkumar Murugesan",
+              speakerPosition: "Co-Founder of JioVio healthcare",
+              speakerImage: "assets/images/senthilkumar.jpeg",
+              speakerDescription:
+                  "Senthilkumar has a great passion for innovating through technology to solve real-life problems. He has innovated in fields like wireless network, defence, maternal healthcare, and safety solutions and filed nearly 10+ patents for the same.",
+            ),
           ],
           options: CarouselOptions(
             autoPlay: false,
             initialPage: 0,
-            height: MediaQuery.of(context).size.height * 3 / 6,
+            height: MediaQuery.of(context).size.height * 4 / 7,
             viewportFraction: 0.8,
             enlargeCenterPage: true,
             enlargeStrategy: CenterPageEnlargeStrategy.scale,

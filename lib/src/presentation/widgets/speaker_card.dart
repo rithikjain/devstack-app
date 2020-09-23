@@ -2,6 +2,18 @@ import 'package:devtalks/src/presentation/themes/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class SpeakerCard extends StatelessWidget {
+  final String speakerName;
+  final String speakerPosition;
+  final String speakerImage;
+  final String speakerDescription;
+
+  SpeakerCard({
+    this.speakerName,
+    this.speakerPosition,
+    this.speakerImage,
+    this.speakerDescription,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -17,24 +29,24 @@ class SpeakerCard extends StatelessWidget {
                 margin: EdgeInsets.only(bottom: 16),
                 height: 100,
                 child: ClipOval(
-                  child: Image.asset("assets/images/Profile4.png"),
+                  child: Image.asset(speakerImage),
                 ),
               ),
               SizedBox(height: 8),
               Text(
-                "Rithik Jain",
+                speakerName,
                 style: BlackHeadingText,
               ),
-              SizedBox(height: 8),
+              SizedBox(height: 4),
               Text(
-                "Developer",
-                style: BlueText,
+                speakerPosition,
+                style: BlueText.copyWith(fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 12),
+              SizedBox(height: 32),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 32),
                 child: Text(
-                  "An enthusiastic web developer, who started her career at the age of 16. Now working at Philips, India.",
+                  speakerDescription,
                   style: TextStyle(fontSize: 16),
                   textAlign: TextAlign.center,
                 ),
