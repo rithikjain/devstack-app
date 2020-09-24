@@ -30,7 +30,8 @@ class QuestionCard extends StatelessWidget {
           height: 38,
           width: 38,
           child: Image.asset(
-            "assets/images/thumbsUpGrey.png",
+            "assets/images/thumbsUpFill.png",
+            color: Color(0xFF8383c3),
             scale: 4.5,
           ),
         ),
