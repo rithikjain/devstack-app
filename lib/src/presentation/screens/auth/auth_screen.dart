@@ -85,15 +85,9 @@ class _AuthScreenState extends State<AuthScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(height: 40),
-                    Hero(
-                      tag: "logo",
-                      child: Material(
-                        color: Colors.transparent,
-                        child: Container(
-                          width: 120,
-                          child: Image.asset("assets/images/devtalks.png"),
-                        ),
-                      ),
+                    Container(
+                      width: 120,
+                      child: Image.asset("assets/images/devtalks.png"),
                     ),
                     Expanded(
                       child: ShowUp(
@@ -101,6 +95,16 @@ class _AuthScreenState extends State<AuthScreen> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            Container(
+                              alignment: Alignment.center,
+                              margin: EdgeInsets.symmetric(horizontal: 32),
+                              width: 200,
+                              child: Image.asset(
+                                "assets/images/devtalks_logo.png",
+                              ),
+                            ),
+                            SizedBox(
+                                height: MediaQuery.of(context).size.height / 6),
                             Container(
                               height: 50,
                               width: MediaQuery.of(context).size.width * 0.5,
