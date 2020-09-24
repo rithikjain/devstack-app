@@ -1,3 +1,4 @@
+import 'package:devtalks/src/presentation/screens/main/contact_screen.dart';
 import 'package:devtalks/src/presentation/screens/main/home_screen.dart';
 import 'package:devtalks/src/presentation/screens/main/notification_screen.dart';
 import 'package:devtalks/src/presentation/screens/main/profile_page.dart';
@@ -22,6 +23,7 @@ class _BaseScreenState extends State<BaseScreen> {
     SpeakersScreen(),
     QuestionsScreen(),
     ProfilePage(),
+    ContactScreen(),
   ];
 
   @override
@@ -115,6 +117,10 @@ class _BaseScreenState extends State<BaseScreen> {
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
               title: Text("Profile"),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.info),
+              title: Text("Contact"),
             ),
           ],
           onTap: (value) {
