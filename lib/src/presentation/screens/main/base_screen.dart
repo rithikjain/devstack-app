@@ -1,4 +1,5 @@
 import 'package:devtalks/src/presentation/screens/main/home_screen.dart';
+import 'package:devtalks/src/presentation/screens/main/notification_screen.dart';
 import 'package:devtalks/src/presentation/screens/main/profile_page.dart';
 import 'package:devtalks/src/presentation/screens/main/questions_screen.dart';
 import 'package:devtalks/src/presentation/screens/main/speakers_screen.dart';
@@ -61,7 +62,14 @@ class _BaseScreenState extends State<BaseScreen> {
                                 color: Colors.transparent,
                                 child: InkWell(
                                   splashColor: palePink,
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            NotificationScreen(),
+                                      ),
+                                    );
+                                  },
                                   child: Icon(Icons.notifications,
                                       color: palePink),
                                 ),

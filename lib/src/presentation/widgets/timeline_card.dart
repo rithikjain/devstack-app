@@ -11,7 +11,7 @@ class TimelineCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 32, vertical: 8),
-      height: 80,
+      padding: EdgeInsets.all(8),
       child: ListTile(
         leading: Column(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -45,10 +45,12 @@ class HomeScreen extends StatelessWidget {
             stream: _talks.snapshots(includeMetadataChanges: true),
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.hasError) {
-                return Center(child: Text("Something went wrong"));
+                return Expanded(
+                  child: Center(child: Text("Something went wrong")),
+                );
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Container();
+                return Expanded(child: Container());
               }
               snapshot.data.docs.forEach((element) {
                 print(element.data());
