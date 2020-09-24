@@ -7,7 +7,7 @@ class QuestionCard extends StatelessWidget {
   final String description;
   final int upvotes;
   final bool isUpvoted;
-  final bool showDelete;
+  final bool isOwnQuestion;
   final String questionID;
   final Function onCancelUpvote;
   final Function onUpvote;
@@ -19,9 +19,56 @@ class QuestionCard extends StatelessWidget {
     this.onUpvote,
     this.onCancelUpvote,
     this.isUpvoted,
-    this.showDelete,
+    this.isOwnQuestion,
     this.questionID,
   });
+
+  Widget _buildUpvoteUI(BuildContext context) {
+    if (isOwnQuestion) {
+      return Image.asset(
+        "assets/images/thumbsUpGrey.png",
+        scale: 4.5,
+      );
+    } else {
+      if (isUpvoted) {
+        return ClipOval(
+          child: Container(
+            height: 38,
+            width: 38,
+            child: Material(
+              color: lightGrey,
+              child: InkWell(
+                splashColor: lightBlue,
+                onTap: onCancelUpvote,
+                child: Image.asset(
+                  "assets/images/thumbsUpFill.png",
+                  scale: 4.5,
+                ),
+              ),
+            ),
+          ),
+        );
+      } else {
+        return ClipOval(
+          child: Container(
+            height: 38,
+            width: 38,
+            child: Material(
+              color: lightGrey,
+              child: InkWell(
+                splashColor: lightBlue,
+                onTap: onUpvote,
+                child: Image.asset(
+                  "assets/images/thumbsUpOutline.png",
+                  scale: 4.5,
+                ),
+              ),
+            ),
+          ),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,56 +111,8 @@ class QuestionCard extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          (!isUpvoted)
-                              ? OutlineButton(
-                                  child: Text(
-                                    "Upvote",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  onPressed: onUpvote,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(14),
-                                  ),
-                                  textColor: Colors.green,
-                                  highlightedBorderColor: Colors.green,
-                                  borderSide: BorderSide(
-                                    color: Colors.green,
-                                    width: 2,
-                                  ),
-                                )
-                              : OutlineButton(
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.cancel,
-                                        color: Colors.red,
-                                        size: 18,
-                                      ),
-                                      SizedBox(width: 8),
-                                      Text(
-                                        "Upvote",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  onPressed: onCancelUpvote,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(14),
-                                  ),
-                                  textColor: Colors.red,
-                                  highlightedBorderColor: Colors.red,
-                                  borderSide: BorderSide(
-                                    color: Colors.red,
-                                    width: 2,
-                                  ),
-                                ),
-                          SizedBox(width: 12),
                           Visibility(
-                            visible: showDelete,
+                            visible: isOwnQuestion,
                             child: InkWell(
                               child: Icon(Icons.delete, color: palePink),
                               onTap: () {
@@ -128,18 +127,18 @@ class QuestionCard extends StatelessWidget {
                         ],
                       ),
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
                             upvotes.toString(),
                             style: TextStyle(
-                              color: palePink,
+                              color: lightBlue,
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
                             ),
                           ),
                           SizedBox(width: 8),
-                          Icon(Icons.thumb_up, color: palePink),
+                          _buildUpvoteUI(context),
                         ],
                       ),
                     ],

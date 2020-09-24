@@ -57,6 +57,7 @@ class HomeScreen extends StatelessWidget {
                 child: ShowUp(
                   delay: Duration(milliseconds: 200),
                   child: ListView.builder(
+                    padding: EdgeInsets.only(bottom: 16),
                     itemBuilder: (context, index) => TimelineCard(
                       talkName: snapshot.data.docs[index].data()["talkName"],
                       timings: snapshot.data.docs[index].data()["talkTime"],

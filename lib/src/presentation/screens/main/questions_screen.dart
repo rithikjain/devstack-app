@@ -75,6 +75,7 @@ class QuestionsScreen extends StatelessWidget {
                 child: ShowUp(
                   delay: Duration(milliseconds: 200),
                   child: ListView.builder(
+                    padding: EdgeInsets.only(bottom: 56),
                     itemBuilder: (context, index) {
                       final question = snapshot.data.docs[index];
                       List<String> usersUpvoted =
@@ -89,7 +90,7 @@ class QuestionsScreen extends StatelessWidget {
                             : () => upVote(question.id),
                         isUpvoted: hasUserUpvoted,
                         onCancelUpvote: () => cancelUpVote(question.id),
-                        showDelete: question.data()["createdBy"] == _userID,
+                        isOwnQuestion: question.data()["createdBy"] == _userID,
                         questionID: question.id,
                       );
                     },
