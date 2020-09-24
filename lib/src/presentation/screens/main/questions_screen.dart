@@ -63,66 +63,55 @@ class QuestionsScreen extends StatelessWidget {
               ),
             ),
           ),
-          StreamBuilder<QuerySnapshot>(
-            stream: _questions.snapshots(includeMetadataChanges: true),
-            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (snapshot.hasError) {
-                return Center(child: Text("Something went wrong"));
-              }
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Container();
-              }
-              return Expanded(
-                child: ShowUp(
-                  delay: Duration(milliseconds: 200),
-                  child: FirestoreAnimatedList(
-                    physics: BouncingScrollPhysics(),
-                    padding: EdgeInsets.only(bottom: 56),
-                    query: _questions,
-                    itemBuilder: (context, snapshot, animation, index) {
-                      final question = snapshot;
-                      List<String> usersUpvoted =
-                          List.from(question.data()["usersUpvoted"]);
-                      bool hasUserUpvoted = usersUpvoted.contains(_userID);
-                      return QuestionCard(
-                        question: question.data()["title"],
-                        description: question.data()["description"],
-                        upvotes: question.data()["upvotes"],
-                        onUpvote: (question.data()["createdBy"] == _userID)
-                            ? null
-                            : () => upVote(question.id),
-                        isUpvoted: hasUserUpvoted,
-                        onCancelUpvote: () => cancelUpVote(question.id),
-                        isOwnQuestion: question.data()["createdBy"] == _userID,
-                        questionID: question.id,
-                      );
-                    },
-                  ),
-                  // ListView.builder(
-                  //   padding: EdgeInsets.only(bottom: 56),
-                  //   itemBuilder: (context, index) {
-                  //     final question = snapshot.data.docs[index];
-                  //     List<String> usersUpvoted =
-                  //         List.from(question.data()["usersUpvoted"]);
-                  //     bool hasUserUpvoted = usersUpvoted.contains(_userID);
-                  //     return QuestionCard(
-                  //       question: question.data()["title"],
-                  //       description: question.data()["description"],
-                  //       upvotes: question.data()["upvotes"],
-                  //       onUpvote: (question.data()["createdBy"] == _userID)
-                  //           ? null
-                  //           : () => upVote(question.id),
-                  //       isUpvoted: hasUserUpvoted,
-                  //       onCancelUpvote: () => cancelUpVote(question.id),
-                  //       isOwnQuestion: question.data()["createdBy"] == _userID,
-                  //       questionID: question.id,
-                  //     );
-                  //   },
-                  //   itemCount: snapshot.data.docs.length,
-                  // ),
-                ),
-              );
-            },
+          Expanded(
+            child: ShowUp(
+              delay: Duration(milliseconds: 200),
+              child: FirestoreAnimatedList(
+                physics: BouncingScrollPhysics(),
+                padding: EdgeInsets.only(bottom: 56),
+                query: _questions,
+                itemBuilder: (context, snapshot, animation, index) {
+                  final question = snapshot;
+                  List<String> usersUpvoted =
+                      List.from(question.data()["usersUpvoted"]);
+                  bool hasUserUpvoted = usersUpvoted.contains(_userID);
+                  return QuestionCard(
+                    question: question.data()["title"],
+                    description: question.data()["description"],
+                    upvotes: question.data()["upvotes"],
+                    onUpvote: (question.data()["createdBy"] == _userID)
+                        ? null
+                        : () => upVote(question.id),
+                    isUpvoted: hasUserUpvoted,
+                    onCancelUpvote: () => cancelUpVote(question.id),
+                    isOwnQuestion: question.data()["createdBy"] == _userID,
+                    questionID: question.id,
+                  );
+                },
+              ),
+              // ListView.builder(
+              //   padding: EdgeInsets.only(bottom: 56),
+              //   itemBuilder: (context, index) {
+              //     final question = snapshot.data.docs[index];
+              //     List<String> usersUpvoted =
+              //         List.from(question.data()["usersUpvoted"]);
+              //     bool hasUserUpvoted = usersUpvoted.contains(_userID);
+              //     return QuestionCard(
+              //       question: question.data()["title"],
+              //       description: question.data()["description"],
+              //       upvotes: question.data()["upvotes"],
+              //       onUpvote: (question.data()["createdBy"] == _userID)
+              //           ? null
+              //           : () => upVote(question.id),
+              //       isUpvoted: hasUserUpvoted,
+              //       onCancelUpvote: () => cancelUpVote(question.id),
+              //       isOwnQuestion: question.data()["createdBy"] == _userID,
+              //       questionID: question.id,
+              //     );
+              //   },
+              //   itemCount: snapshot.data.docs.length,
+              // ),
+            ),
           ),
         ],
       ),
