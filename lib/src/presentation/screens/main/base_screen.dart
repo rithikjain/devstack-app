@@ -39,6 +39,7 @@ class _BaseScreenState extends State<BaseScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      Expanded(child: Container()),
                       Hero(
                         tag: "logo",
                         child: Material(
@@ -46,6 +47,26 @@ class _BaseScreenState extends State<BaseScreen> {
                           child: Container(
                             width: 120,
                             child: Image.asset("assets/images/devtalks.png"),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: ClipOval(
+                            child: Container(
+                              height: 25,
+                              width: 25,
+                              child: Material(
+                                color: Colors.transparent,
+                                child: InkWell(
+                                  splashColor: palePink,
+                                  onTap: () {},
+                                  child: Icon(Icons.notifications,
+                                      color: palePink),
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
