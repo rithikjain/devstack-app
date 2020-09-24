@@ -29,7 +29,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "6th October",
+                  "4th October",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,

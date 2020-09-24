@@ -121,7 +121,7 @@ class QuestionCard extends StatelessWidget {
                           Visibility(
                             visible: isOwnQuestion,
                             child: InkWell(
-                              child: Icon(Icons.delete, color: palePink),
+                              child: Icon(Icons.delete, color: lightBlue),
                               onTap: () {
                                 showDialog(
                                   context: context,
