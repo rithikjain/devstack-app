@@ -127,7 +127,8 @@ class AddQuestionDialog extends StatelessWidget {
                         color: Colors.green,
                         width: 2,
                       ),
-                    )
+                    ),
+                    SizedBox(width: 2),
                   ],
                 ),
                 SizedBox(height: 24),
