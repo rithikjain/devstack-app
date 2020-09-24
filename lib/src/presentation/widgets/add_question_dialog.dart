@@ -9,6 +9,8 @@ class AddQuestionDialog extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
   final String _userID = FirebaseAuth.instance.currentUser.uid;
+  final String _userName = FirebaseAuth.instance.currentUser.displayName;
+  final String _userEmail = FirebaseAuth.instance.currentUser.email;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,8 @@ class AddQuestionDialog extends StatelessWidget {
         "createdBy": _userID,
         "description": _descController.text.trim(),
         "title": _titleController.text.trim(),
+        "createdByName": _userName,
+        "createdByEmail": _userEmail,
         "upvotes": 0,
         "usersUpvoted": [],
       });

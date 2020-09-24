@@ -3,7 +3,6 @@ import 'package:devtalks/src/presentation/animations/show_up.dart';
 import 'package:devtalks/src/presentation/themes/themes.dart';
 import 'package:devtalks/src/presentation/widgets/bg_gradient.dart';
 import 'package:devtalks/src/presentation/widgets/notification_card.dart';
-import 'package:devtalks/src/presentation/widgets/timeline_card.dart';
 import 'package:flutter/material.dart';
 
 class NotificationScreen extends StatelessWidget {
