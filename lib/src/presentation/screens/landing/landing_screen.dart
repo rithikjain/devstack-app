@@ -15,7 +15,7 @@ class _LandingScreenState extends State<LandingScreen> {
   @override
   void initState() {
     super.initState();
-    _checkStatus();
+    //_checkStatus();
   }
 
   _checkStatus() async {
@@ -44,17 +44,11 @@ class _LandingScreenState extends State<LandingScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Hero(
-                  tag: "logo",
-                  child: Material(
-                    color: Colors.transparent,
-                    child: Container(
-                      alignment: Alignment.center,
-                      margin: EdgeInsets.symmetric(horizontal: 32),
-                      width: 200,
-                      child: Image.asset("assets/images/logowithtext.png"),
-                    ),
-                  ),
+                Container(
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.symmetric(horizontal: 32),
+                  width: 200,
+                  child: Image.asset("assets/images/logowithtext.png"),
                 ),
                 SizedBox(height: 25),
                 Text(
@@ -65,33 +59,10 @@ class _LandingScreenState extends State<LandingScreen> {
                   ),
                 ),
                 SizedBox(height: 32),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      "assets/images/dsc_logo_icon.png",
-                      height: 15,
-                    ),
-                    SizedBox(width: 8),
-                    RichText(
-                      text: TextSpan(
-                          text: "DSC ",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                          children: [
-                            TextSpan(
-                              text: "VIT",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ]),
-                    ),
-                  ],
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 16),
+                  width: 250,
+                  child: Image.asset("assets/images/dsclogo.png"),
                 ),
                 SizedBox(height: 80),
               ],
