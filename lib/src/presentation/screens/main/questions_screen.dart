@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:devtalks/src/presentation/animations/show_up.dart';
+import 'package:devtalks/src/presentation/themes/text_styles.dart';
 import 'package:devtalks/src/presentation/themes/themes.dart';
 import 'package:devtalks/src/presentation/widgets/add_question_dialog.dart';
 import 'package:devtalks/src/presentation/widgets/question_card.dart';
@@ -70,6 +71,16 @@ class QuestionsScreen extends StatelessWidget {
                 physics: BouncingScrollPhysics(),
                 padding: EdgeInsets.only(bottom: 56),
                 query: _questions,
+                emptyChild: Center(
+                  child: Container(
+                    margin: EdgeInsets.all(16),
+                    child: Text(
+                      "Looks like no question has been posted yet!",
+                      textAlign: TextAlign.center,
+                      style: WhiteText,
+                    ),
+                  ),
+                ),
                 itemBuilder: (context, snapshot, animation, index) {
                   final question = snapshot;
                   List<String> usersUpvoted =
