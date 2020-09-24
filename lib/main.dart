@@ -85,7 +85,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       navigatorKey: _navigatorKey,
-      title: 'DevStack',
+      title: 'DevTalks',
       theme: lightTheme,
       home: LandingScreen(),
       routes: {

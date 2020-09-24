@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:devtalks/src/presentation/themes/text_styles.dart';
+import 'package:devtalks/src/presentation/themes/themes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -120,6 +121,35 @@ class AddQuestionDialog extends StatelessWidget {
                         if (_formKey.currentState.validate()) {
                           addQuestion();
                           Navigator.of(context).pop();
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              content: Padding(
+                                padding: EdgeInsets.all(16),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      "Question Added!",
+                                      style: TextStyle(
+                                        color: darkBlue,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(height: 32),
+                                    Container(
+                                      height: 60,
+                                      width: 60,
+                                      child: Image.asset(
+                                        "assets/images/done_icon.png",
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
                         }
                       },
                       shape: RoundedRectangleBorder(
