@@ -4,6 +4,7 @@ import 'package:devtalks/src/presentation/themes/themes.dart';
 import 'package:devtalks/src/presentation/widgets/add_question_dialog.dart';
 import 'package:devtalks/src/presentation/widgets/question_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firestore_ui/animated_firestore_list.dart';
 import 'package:flutter/material.dart';
 
 class QuestionsScreen extends StatelessWidget {
@@ -74,10 +75,12 @@ class QuestionsScreen extends StatelessWidget {
               return Expanded(
                 child: ShowUp(
                   delay: Duration(milliseconds: 200),
-                  child: ListView.builder(
+                  child: FirestoreAnimatedList(
+                    physics: BouncingScrollPhysics(),
                     padding: EdgeInsets.only(bottom: 56),
-                    itemBuilder: (context, index) {
-                      final question = snapshot.data.docs[index];
+                    query: _questions,
+                    itemBuilder: (context, snapshot, animation, index) {
+                      final question = snapshot;
                       List<String> usersUpvoted =
                           List.from(question.data()["usersUpvoted"]);
                       bool hasUserUpvoted = usersUpvoted.contains(_userID);
@@ -94,8 +97,29 @@ class QuestionsScreen extends StatelessWidget {
                         questionID: question.id,
                       );
                     },
-                    itemCount: snapshot.data.docs.length,
                   ),
+                  // ListView.builder(
+                  //   padding: EdgeInsets.only(bottom: 56),
+                  //   itemBuilder: (context, index) {
+                  //     final question = snapshot.data.docs[index];
+                  //     List<String> usersUpvoted =
+                  //         List.from(question.data()["usersUpvoted"]);
+                  //     bool hasUserUpvoted = usersUpvoted.contains(_userID);
+                  //     return QuestionCard(
+                  //       question: question.data()["title"],
+                  //       description: question.data()["description"],
+                  //       upvotes: question.data()["upvotes"],
+                  //       onUpvote: (question.data()["createdBy"] == _userID)
+                  //           ? null
+                  //           : () => upVote(question.id),
+                  //       isUpvoted: hasUserUpvoted,
+                  //       onCancelUpvote: () => cancelUpVote(question.id),
+                  //       isOwnQuestion: question.data()["createdBy"] == _userID,
+                  //       questionID: question.id,
+                  //     );
+                  //   },
+                  //   itemCount: snapshot.data.docs.length,
+                  // ),
                 ),
               );
             },

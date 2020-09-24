@@ -32,6 +32,7 @@ dependencies:
   shared_preferences: ^0.5.10
   cached_network_image: ^2.3.2+1
   firebase_messaging: ^7.0.0
+  firestore_ui: ^1.11.0
 
 dev_dependencies:
   flutter_test:
