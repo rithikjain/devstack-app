@@ -25,9 +25,15 @@ class QuestionCard extends StatelessWidget {
 
   Widget _buildUpvoteUI(BuildContext context) {
     if (isOwnQuestion) {
-      return Image.asset(
-        "assets/images/thumbsUpGrey.png",
-        scale: 4.5,
+      return ClipOval(
+        child: Container(
+          height: 38,
+          width: 38,
+          child: Image.asset(
+            "assets/images/thumbsUpGrey.png",
+            scale: 4.5,
+          ),
+        ),
       );
     } else {
       if (isUpvoted) {
@@ -127,15 +133,20 @@ class QuestionCard extends StatelessWidget {
                         ],
                       ),
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text(
-                            upvotes.toString(),
-                            style: TextStyle(
-                              color: lightBlue,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
+                          Column(
+                            children: [
+                              Text(
+                                upvotes.toString(),
+                                style: TextStyle(
+                                  color: lightBlue,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
+                              ),
+                              SizedBox(height: 4),
+                            ],
                           ),
                           SizedBox(width: 8),
                           _buildUpvoteUI(context),
