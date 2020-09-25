@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:confetti/confetti.dart';
 import 'package:devtalks/src/presentation/screens/main/contact_screen.dart';
 import 'package:devtalks/src/presentation/screens/main/home_screen.dart';
 import 'package:devtalks/src/presentation/screens/main/notification_screen.dart';
@@ -26,6 +29,22 @@ class _BaseScreenState extends State<BaseScreen> {
     ContactScreen(),
   ];
 
+  ConfettiController _controllerTopCenter;
+
+  @override
+  void initState() {
+    _controllerTopCenter = ConfettiController(
+      duration: const Duration(seconds: 2),
+    );
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controllerTopCenter.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,15 +62,12 @@ class _BaseScreenState extends State<BaseScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Expanded(child: Container()),
-                      Hero(
-                        tag: "logo",
-                        child: Material(
-                          color: Colors.transparent,
-                          child: Container(
-                            width: 120,
-                            child: Image.asset("assets/images/devtalks.png"),
-                          ),
+                      InkWell(
+                        child: Container(
+                          width: 120,
+                          child: Image.asset("assets/images/devtalks.png"),
                         ),
+                        onLongPress: () => _controllerTopCenter.play(),
                       ),
                       Expanded(
                         child: Align(
@@ -85,6 +101,18 @@ class _BaseScreenState extends State<BaseScreen> {
                 ),
                 Expanded(child: screens[_currIndex]),
               ],
+            ),
+          ),
+          Container(
+            alignment: Alignment.topCenter,
+            child: ConfettiWidget(
+              confettiController: _controllerTopCenter,
+              blastDirectionality: BlastDirectionality.explosive,
+              maxBlastForce: 8, // set a lower max blast force
+              minBlastForce: 2, // set a lower min blast force
+              emissionFrequency: 0.1,
+              numberOfParticles: 20, // a lot of particles at once
+              gravity: 1,
             ),
           ),
         ],
