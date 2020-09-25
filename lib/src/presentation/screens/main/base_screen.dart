@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:confetti/confetti.dart';
 import 'package:devtalks/src/presentation/screens/main/contact_screen.dart';
 import 'package:devtalks/src/presentation/screens/main/home_screen.dart';

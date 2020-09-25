@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:devtalks/src/presentation/animations/show_up.dart';
 import 'package:devtalks/src/presentation/themes/text_styles.dart';
 import 'package:devtalks/src/presentation/themes/themes.dart';
+import 'package:devtalks/src/presentation/widgets/meme_dialog.dart';
 import 'package:devtalks/src/utils/contact_info.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -276,9 +277,15 @@ class ContactScreen extends StatelessWidget {
           SizedBox(height: 64),
           ShowUp(
             delay: Duration(milliseconds: 500),
-            child: Container(
-              alignment: Alignment.center,
-              child: Text("Made with ❤ by DSC-VIT", style: WhiteText),
+            child: InkWell(
+              onLongPress: () => showDialog(
+                context: context,
+                child: MemeDialog(),
+              ),
+              child: Container(
+                alignment: Alignment.center,
+                child: Text("Made with ❤ by DSC-VIT", style: WhiteText),
+              ),
             ),
           ),
           SizedBox(height: 16),
