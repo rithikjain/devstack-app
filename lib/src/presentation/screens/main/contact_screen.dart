@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:devtalks/src/presentation/animations/show_up.dart';
 import 'package:devtalks/src/presentation/themes/text_styles.dart';
 import 'package:devtalks/src/presentation/themes/themes.dart';
@@ -58,6 +59,18 @@ class ContactScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void addToMailingList() {
+      CollectionReference _emailsRef =
+          FirebaseFirestore.instance.collection("mailingList");
+      _emailsRef.get().then((snapshot) => {
+            snapshot.docs.forEach((doc) {
+              print(doc.data()["email"]);
+            })
+          });
+    }
+
+    addToMailingList();
+
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       padding: EdgeInsets.only(bottom: 16),
@@ -223,6 +236,16 @@ class ContactScreen extends StatelessWidget {
               ],
             ),
           ),
+          // ---------- Made with love section ---------
+          SizedBox(height: 64),
+          ShowUp(
+            delay: Duration(milliseconds: 500),
+            child: Container(
+              alignment: Alignment.center,
+              child: Text("Made with ❤ by DSC-VIT", style: WhiteText),
+            ),
+          ),
+          SizedBox(height: 16),
         ],
       ),
     );
