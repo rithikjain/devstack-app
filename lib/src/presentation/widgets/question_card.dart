@@ -1,5 +1,6 @@
 import 'package:devtalks/src/presentation/themes/themes.dart';
 import 'package:devtalks/src/presentation/widgets/delete_dialog.dart';
+import 'package:devtalks/src/presentation/widgets/stonks_dialog.dart';
 import 'package:flutter/material.dart';
 
 class QuestionCard extends StatelessWidget {
@@ -23,16 +24,33 @@ class QuestionCard extends StatelessWidget {
     this.questionID,
   });
 
+  void _makeSnackbar(BuildContext context) {
+    final snackBar = SnackBar(
+      content: Text(
+        "Don't try so hard to upvote your own question 😉",
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      backgroundColor: darkBlue,
+    );
+    Scaffold.of(context).showSnackBar(snackBar);
+  }
+
   Widget _buildUpvoteUI(BuildContext context) {
     if (isOwnQuestion) {
       return ClipOval(
         child: Container(
           height: 38,
           width: 38,
-          child: Image.asset(
-            "assets/images/thumbsUpFill.png",
-            color: Color(0xFF8c8cba),
-            scale: 4.5,
+          child: InkWell(
+            child: Image.asset(
+              "assets/images/thumbsUpFill.png",
+              color: Color(0xFF8c8cba),
+              scale: 4.5,
+            ),
+            onLongPress: () => _makeSnackbar(context),
           ),
         ),
       );
@@ -68,6 +86,10 @@ class QuestionCard extends StatelessWidget {
                 child: Image.asset(
                   "assets/images/thumbsUpOutline.png",
                   scale: 4.5,
+                ),
+                onLongPress: () => showDialog(
+                  context: context,
+                  child: StonksDialog(),
                 ),
               ),
             ),
