@@ -40,6 +40,21 @@ class ContactScreen extends StatelessWidget {
     ),
   ];
 
+  void _makeErrorSnackbar(BuildContext context) {
+    final snackBar = SnackBar(
+      content: Text(
+        'Something went wrong!',
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: Colors.red,
+    );
+    Scaffold.of(context).showSnackBar(snackBar);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -89,18 +104,7 @@ class ContactScreen extends StatelessWidget {
                                 if (await canLaunch(_contactInfo[index].url)) {
                                   await launch(_contactInfo[index].url);
                                 } else {
-                                  final snackBar = SnackBar(
-                                    content: Text(
-                                      'Something went wrong!',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    behavior: SnackBarBehavior.floating,
-                                    backgroundColor: Colors.red,
-                                  );
-                                  Scaffold.of(context).showSnackBar(snackBar);
+                                  _makeErrorSnackbar(context);
                                 }
                               },
                             ),
