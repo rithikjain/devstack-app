@@ -90,12 +90,12 @@ class _AuthScreenState extends State<AuthScreen> {
                       child: Image.asset("assets/images/devtalks.png"),
                     ),
                     Expanded(
-                      child: ShowUp(
-                        delay: Duration(milliseconds: 600),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ShowUp(
+                            delay: Duration(milliseconds: 200),
+                            child: Container(
                               alignment: Alignment.center,
                               margin: EdgeInsets.symmetric(horizontal: 32),
                               width: 200,
@@ -103,11 +103,14 @@ class _AuthScreenState extends State<AuthScreen> {
                                 "assets/images/devtalks_logo.png",
                               ),
                             ),
-                            SizedBox(
-                                height: MediaQuery.of(context).size.height / 6),
-                            Container(
+                          ),
+                          SizedBox(
+                              height: MediaQuery.of(context).size.height / 6),
+                          ShowUp(
+                            delay: Duration(milliseconds: 600),
+                            child: Container(
                               height: 50,
-                              width: MediaQuery.of(context).size.width * 0.5,
+                              width: MediaQuery.of(context).size.width * 0.6,
                               child: RaisedButton(
                                 onPressed: () async {
                                   if (!_isLoading) {
@@ -141,9 +144,9 @@ class _AuthScreenState extends State<AuthScreen> {
                                       ),
                               ),
                             ),
-                            SizedBox(height: 100),
-                          ],
-                        ),
+                          ),
+                          SizedBox(height: 100),
+                        ],
                       ),
                     ),
                   ],
