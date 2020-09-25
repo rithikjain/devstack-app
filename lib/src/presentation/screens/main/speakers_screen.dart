@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:devtalks/src/presentation/animations/show_up.dart';
 import 'package:devtalks/src/presentation/themes/themes.dart';
 import 'package:devtalks/src/presentation/widgets/speaker_card.dart';
 import 'package:flutter/material.dart';
@@ -116,7 +117,10 @@ class SpeakersScreen extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: buildSpeakersUI(context),
+          child: ShowUp(
+            delay: Duration(milliseconds: 200),
+            child: buildSpeakersUI(context),
+          ),
         ),
         SizedBox(height: 32),
       ],

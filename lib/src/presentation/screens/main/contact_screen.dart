@@ -1,4 +1,5 @@
 import 'package:devtalks/src/presentation/animations/show_up.dart';
+import 'package:devtalks/src/presentation/themes/text_styles.dart';
 import 'package:devtalks/src/presentation/themes/themes.dart';
 import 'package:devtalks/src/utils/contact_info.dart';
 import 'package:flutter/material.dart';
@@ -57,68 +58,173 @@ class ContactScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(height: 32),
-        Container(
-          margin: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-          child: Text(
-            "Connect with us",
-            style: TextStyle(
-              color: palePink,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        SizedBox(height: 16),
-        ShowUp(
-          delay: Duration(milliseconds: 200),
-          child: Column(
-            children: [
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 32),
-                child: Container(
-                  margin: EdgeInsets.all(0),
-                  width: double.infinity,
-                  child: GridView.count(
-                    shrinkWrap: true,
-                    crossAxisCount: 4,
-                    crossAxisSpacing: 32,
-                    mainAxisSpacing: 16,
-                    physics: BouncingScrollPhysics(),
-                    children: List.generate(
-                      8,
-                      (index) {
-                        return Container(
-                          margin: EdgeInsets.all(8),
-                          child: ClipOval(
-                            child: InkWell(
-                              child: Container(
-                                color: Colors.white,
-                                padding: EdgeInsets.all(12),
-                                child: Image.asset(_contactInfo[index].asset),
-                              ),
-                              onTap: () async {
-                                if (await canLaunch(_contactInfo[index].url)) {
-                                  await launch(_contactInfo[index].url);
-                                } else {
-                                  _makeErrorSnackbar(context);
-                                }
-                              },
-                            ),
-                          ),
-                        );
-                      },
+    return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
+      padding: EdgeInsets.only(bottom: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // ---------- Intrested in devjams section -----------
+          SizedBox(height: 32),
+          ShowUp(
+            delay: Duration(milliseconds: 200),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                  child: Text(
+                    "Intrested in DevJams?",
+                    style: TextStyle(
+                      color: palePink,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-              ),
-            ],
+                SizedBox(height: 16),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 32),
+                  child: MaterialButton(
+                    child: Text(
+                      "Keep me notified 😊",
+                      style: WhiteText.copyWith(fontSize: 16),
+                    ),
+                    color: lightBlue,
+                    onPressed: () {},
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+          // --------- DSC Events section -------
+          SizedBox(height: 48),
+          ShowUp(
+            delay: Duration(milliseconds: 300),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                  child: Text(
+                    "Want to know about upcoming DSC events?",
+                    style: TextStyle(
+                      color: palePink,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(left: 32),
+                      child: MaterialButton(
+                        child: Text(
+                          "Yes",
+                          style: WhiteText.copyWith(fontSize: 16),
+                        ),
+                        color: lightBlue,
+                        onPressed: () async {
+                          const URL =
+                              "https://dsc.community.dev/vellore-institute-of-technology/";
+                          if (await canLaunch(URL)) {
+                            await launch(URL);
+                          } else {
+                            _makeErrorSnackbar(context);
+                          }
+                        },
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 16),
+                      child: MaterialButton(
+                        child: Text(
+                          "Definitely Yes 🔥",
+                          style: WhiteText.copyWith(fontSize: 16),
+                        ),
+                        color: lightBlue,
+                        onPressed: () async {
+                          const URL =
+                              "https://dsc.community.dev/vellore-institute-of-technology/";
+                          if (await canLaunch(URL)) {
+                            await launch(URL);
+                          } else {
+                            _makeErrorSnackbar(context);
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          // ---------- Connect with us section ---------
+          SizedBox(height: 48),
+          ShowUp(
+            delay: Duration(milliseconds: 400),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                  child: Text(
+                    "Connect with us!",
+                    style: TextStyle(
+                      color: palePink,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 16),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 32),
+                  child: Container(
+                    margin: EdgeInsets.all(0),
+                    width: double.infinity,
+                    child: GridView.count(
+                      shrinkWrap: true,
+                      crossAxisCount: 4,
+                      crossAxisSpacing: 32,
+                      mainAxisSpacing: 16,
+                      physics: BouncingScrollPhysics(),
+                      children: List.generate(
+                        8,
+                        (index) {
+                          return Container(
+                            margin: EdgeInsets.all(8),
+                            child: ClipOval(
+                              child: InkWell(
+                                child: Container(
+                                  color: Colors.white,
+                                  padding: EdgeInsets.all(12),
+                                  child: Image.asset(_contactInfo[index].asset),
+                                ),
+                                onTap: () async {
+                                  if (await canLaunch(
+                                      _contactInfo[index].url)) {
+                                    await launch(_contactInfo[index].url);
+                                  } else {
+                                    _makeErrorSnackbar(context);
+                                  }
+                                },
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
