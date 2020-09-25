@@ -3,6 +3,7 @@ import 'package:devtalks/src/presentation/animations/show_up.dart';
 import 'package:devtalks/src/presentation/themes/text_styles.dart';
 import 'package:devtalks/src/presentation/themes/themes.dart';
 import 'package:devtalks/src/utils/contact_info.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -42,6 +43,21 @@ class ContactScreen extends StatelessWidget {
     ),
   ];
 
+  void _makeSuccessSnackbar(BuildContext context, String msg) {
+    final snackBar = SnackBar(
+      content: Text(
+        msg,
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: Colors.green,
+    );
+    Scaffold.of(context).showSnackBar(snackBar);
+  }
+
   void _makeErrorSnackbar(BuildContext context) {
     final snackBar = SnackBar(
       content: Text(
@@ -59,17 +75,35 @@ class ContactScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void addToMailingList() {
-      CollectionReference _emailsRef =
-          FirebaseFirestore.instance.collection("mailingList");
-      _emailsRef.get().then((snapshot) => {
-            snapshot.docs.forEach((doc) {
-              print(doc.data()["email"]);
-            })
-          });
-    }
+    void addToMailingList() async {
+      bool emailExists = false;
+      final String userEmail = FirebaseAuth.instance.currentUser.email;
 
-    addToMailingList();
+      CollectionReference emailsRef =
+          FirebaseFirestore.instance.collection("mailingList");
+      final snapshots = await emailsRef.get();
+
+      snapshots.docs.forEach((doc) {
+        if (doc.data()["email"] == userEmail) {
+          emailExists = true;
+        }
+      });
+
+      if (emailExists) {
+        _makeSuccessSnackbar(
+          context,
+          "Hooray, You are already in our mailing list. Stay tuned!",
+        );
+      } else {
+        await emailsRef.add({
+          "email": userEmail,
+        });
+        _makeSuccessSnackbar(
+          context,
+          "We will keep you updated. Stay tuned!",
+        );
+      }
+    }
 
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
@@ -104,7 +138,9 @@ class ContactScreen extends StatelessWidget {
                       style: WhiteText.copyWith(fontSize: 16),
                     ),
                     color: lightBlue,
-                    onPressed: () {},
+                    onPressed: () {
+                      addToMailingList();
+                    },
                   ),
                 ),
               ],
