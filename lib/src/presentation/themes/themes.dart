@@ -7,7 +7,7 @@ const lightGrey = Color(0xFFF3F3F3);
 
 final InputDecorationTheme inputTheme = InputDecorationTheme(
   border: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(24),
+    borderRadius: BorderRadius.circular(10),
     borderSide: BorderSide(
       color: Colors.grey,
       width: 1,
@@ -24,9 +24,6 @@ final pageTransition = PageTransitionsTheme(
     TargetPlatform.android: ZoomPageTransitionsBuilder(),
   },
 );
-
-// cicular border radius with value 12
-final borderRadius12 = BorderRadius.circular(12);
 
 final ThemeData lightTheme = ThemeData(
   fontFamily: 'Metropolis',

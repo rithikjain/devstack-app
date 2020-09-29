@@ -118,8 +118,8 @@ class _BaseScreenState extends State<BaseScreen> {
       extendBody: true,
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
         ),
         child: BottomNavigationBar(
           currentIndex: _currIndex,

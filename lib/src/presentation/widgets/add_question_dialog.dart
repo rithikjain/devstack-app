@@ -100,13 +100,13 @@ class AddQuestionDialog extends StatelessWidget {
                         Navigator.of(context).pop();
                       },
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14),
+                        borderRadius: BorderRadius.circular(5),
                       ),
                       highlightedBorderColor: Colors.red,
                       textColor: Colors.red,
                       borderSide: BorderSide(
                         color: Colors.red,
-                        width: 2,
+                        width: 1.5,
                       ),
                     ),
                     SizedBox(width: 16),
@@ -153,13 +153,13 @@ class AddQuestionDialog extends StatelessWidget {
                         }
                       },
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14),
+                        borderRadius: BorderRadius.circular(5),
                       ),
                       textColor: Colors.green,
                       highlightedBorderColor: Colors.green,
                       borderSide: BorderSide(
                         color: Colors.green,
-                        width: 2,
+                        width: 1.5,
                       ),
                     ),
                     SizedBox(width: 2),
