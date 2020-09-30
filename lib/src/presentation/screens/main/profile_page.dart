@@ -24,16 +24,19 @@ class ProfilePage extends StatelessWidget {
             CircleAvatar(
               radius: 68,
               backgroundColor: lightBlue,
-              child: CircleAvatar(
-                radius: 60,
-                backgroundImage: CachedNetworkImageProvider(_user.photoURL),
-              ),
+              child: (_user.photoURL != null)
+                  ? CircleAvatar(
+                      radius: 60,
+                      backgroundImage:
+                          CachedNetworkImageProvider(_user.photoURL),
+                    )
+                  : Container(),
             ),
             SizedBox(height: 56),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 8),
               child: Text(
-                _user.displayName,
+                (_user.displayName != null) ? _user.displayName : "<Your Name>",
                 textAlign: TextAlign.center,
                 style: WhiteText.copyWith(
                   fontWeight: FontWeight.bold,

@@ -1,8 +1,11 @@
 import 'package:devtalks/src/presentation/animations/show_up.dart';
 import 'package:devtalks/src/presentation/screens/main/base_screen.dart';
+import 'package:devtalks/src/presentation/themes/text_styles.dart';
+import 'package:devtalks/src/presentation/themes/themes.dart';
 import 'package:devtalks/src/presentation/widgets/bg_gradient.dart';
 import 'package:devtalks/src/utils/shared_prefs.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -13,15 +16,62 @@ class AuthScreen extends StatefulWidget {
   _AuthScreenState createState() => _AuthScreenState();
 }
 
-class _AuthScreenState extends State<AuthScreen> {
-  bool _isLoading = false;
+class _AuthScreenState extends State<AuthScreen> with WidgetsBindingObserver {
+  bool _isGLoading = false;
+  bool _isELoading = false;
+  String _link;
+  String _email;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  void _showErrorSnackBar(BuildContext context, String message) {
+    final snackBar = SnackBar(
+      content: Text(
+        message,
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: Colors.red,
+    );
+    Scaffold.of(context).showSnackBar(snackBar);
+  }
+
+  void _showSucessSnackBar(BuildContext context, String message) {
+    final snackBar = SnackBar(
+      content: Text(
+        message,
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: Colors.green,
+    );
+    Scaffold.of(context).showSnackBar(snackBar);
+  }
 
   Future<void> _signInWithGoogle(BuildContext context) async {
     try {
       setState(() {
-        _isLoading = true;
+        _isGLoading = true;
       });
       final GoogleSignInAccount googleSignInAccount =
           await _googleSignIn.signIn();
@@ -47,26 +97,240 @@ class _AuthScreenState extends State<AuthScreen> {
           (route) => false,
         );
         setState(() {
-          _isLoading = false;
+          _isGLoading = false;
         });
       }
     } catch (err) {
       setState(() {
-        _isLoading = false;
+        _isGLoading = false;
       });
-      final snackBar = SnackBar(
-        content: Text(
-          'Something went wrong!',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
+      _showErrorSnackBar(context, "Something went wrong!");
+    }
+  }
+
+  void _showDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      child: Dialog(
+        child: Container(
+          margin: EdgeInsets.all(24),
+          child: SingleChildScrollView(
+            child: Material(
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 24),
+                    Container(
+                      child: Text(
+                        "Let's get you in!",
+                        style: BlueText.copyWith(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 32),
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 4),
+                      child: TextFormField(
+                        controller: _emailController,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                          hintText: "Email",
+                        ),
+                        validator: (value) {
+                          Pattern pattern =
+                              r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                          RegExp regex = new RegExp(pattern);
+                          if (!regex.hasMatch(value)) {
+                            return "Please enter a valid email";
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    SizedBox(height: 48),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        OutlineButton(
+                          child: Text(
+                            "Cancel",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          highlightedBorderColor: Colors.red,
+                          textColor: Colors.red,
+                          borderSide: BorderSide(
+                            color: Colors.red,
+                            width: 1.5,
+                          ),
+                        ),
+                        SizedBox(width: 16),
+                        OutlineButton(
+                          child: Text(
+                            "Submit",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          onPressed: () async {
+                            if (_formKey.currentState.validate()) {
+                              bool sent = await _sendSignInWithEmailLink();
+                              if (sent) {
+                                _showSucessSnackBar(context, "Email sent!");
+                                print("send");
+                              } else {
+                                _showErrorSnackBar(
+                                  context,
+                                  "Something went wrong!",
+                                );
+                                print("error");
+                              }
+                              Navigator.of(context).pop();
+                            }
+                          },
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          textColor: Colors.green,
+                          highlightedBorderColor: Colors.green,
+                          borderSide: BorderSide(
+                            color: Colors.green,
+                            width: 1.5,
+                          ),
+                        ),
+                        SizedBox(width: 2),
+                      ],
+                    ),
+                    SizedBox(height: 24),
+                  ],
+                ),
+              ),
+            ),
           ),
         ),
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: Colors.red,
+      ),
+    );
+  }
+
+  Future<bool> _sendSignInWithEmailLink() async {
+    final FirebaseAuth user = FirebaseAuth.instance;
+    setState(() {
+      _email = _emailController.text.trim();
+    });
+    try {
+      user.sendSignInLinkToEmail(
+        email: _emailController.text.trim(),
+        actionCodeSettings: ActionCodeSettings(
+          url: "https://devtalks.page.link/check",
+          dynamicLinkDomain: "devtalks.page.link",
+          android: {
+            "packageName": "com.dscvit.devtalks",
+          },
+          handleCodeInApp: true,
+        ),
       );
-      Scaffold.of(context).showSnackBar(snackBar);
+    } catch (e) {
+      _showGenDialog(e.toString());
+      print(e);
+      return false;
     }
+    print(_emailController.text.trim() + "<< sent");
+    return true;
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      _retrieveDynamicLink();
+    }
+  }
+
+  Future<void> _retrieveDynamicLink() async {
+    // final PendingDynamicLinkData data =
+    //     await FirebaseDynamicLinks.instance.getInitialLink();
+
+    // final Uri deepLink = data?.link;
+    // print(deepLink.toString());
+
+    // if (deepLink.toString() != null) {
+    //   _link = deepLink.toString();
+    //   _signInWithEmailAndLink();
+    // }
+
+    FirebaseDynamicLinks.instance.onLink(
+        onSuccess: (PendingDynamicLinkData dynamicLink) async {
+      final Uri deepLink = dynamicLink?.link;
+
+      print(deepLink.toString());
+
+      if (deepLink != null) {
+        _link = deepLink.toString();
+        _signInWithEmailAndLink();
+      }
+    }, onError: (OnLinkErrorException e) async {
+      print('onLinkError');
+      print(e.message);
+    });
+
+    return "";
+  }
+
+  Future<void> _signInWithEmailAndLink() async {
+    final FirebaseAuth user = FirebaseAuth.instance;
+    bool validLink = user.isSignInWithEmailLink(_link);
+    if (validLink) {
+      try {
+        await user.signInWithEmailLink(
+          email: _email,
+          emailLink: _link,
+        );
+        //_showSucessSnackBar(context, "Sign in successful");
+        SharedPrefs.setLoggedInStatus(true);
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          BaseScreen.routename,
+          (route) => false,
+        );
+        print("logged in");
+      } catch (e) {
+        print(e);
+        _showGenDialog(
+          "Something went wrong, Maybe the link expired. Try again!",
+        );
+      }
+    }
+  }
+
+  void _showGenDialog(String error) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: new Text("Error"),
+          content: new Text("Please Try Again, Error code: " + error),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -107,13 +371,13 @@ class _AuthScreenState extends State<AuthScreen> {
                           SizedBox(
                               height: MediaQuery.of(context).size.height / 6),
                           ShowUp(
-                            delay: Duration(milliseconds: 600),
+                            delay: Duration(milliseconds: 300),
                             child: Container(
                               height: 50,
                               width: MediaQuery.of(context).size.width * 0.6,
                               child: RaisedButton(
                                 onPressed: () async {
-                                  if (!_isLoading) {
+                                  if (!_isGLoading) {
                                     await _signInWithGoogle(context);
                                   }
                                 },
@@ -121,7 +385,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                                child: (!_isLoading)
+                                child: (!_isGLoading)
                                     ? Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -145,7 +409,43 @@ class _AuthScreenState extends State<AuthScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 100),
+                          SizedBox(height: 24),
+                          ShowUp(
+                            delay: Duration(milliseconds: 300),
+                            child: Container(
+                              height: 50,
+                              width: MediaQuery.of(context).size.width * 0.6,
+                              child: RaisedButton(
+                                onPressed: () async {
+                                  if (!_isELoading) {
+                                    _showDialog(context);
+                                  }
+                                },
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: (!_isELoading)
+                                    ? Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Text('Login with Email'),
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Icon(Icons.email, color: darkBlue),
+                                        ],
+                                      )
+                                    : Container(
+                                        height: 35,
+                                        width: 35,
+                                        child: CircularProgressIndicator(),
+                                      ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 75),
                         ],
                       ),
                     ),
