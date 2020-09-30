@@ -15,7 +15,7 @@ class SpeakersScreen extends StatelessWidget {
           carouselController: _carouselController,
           items: [
             SpeakerCard(
-              speakerName: "Swapnil Borker",
+              speakerName: "Swapnil Borkar",
               speakerPosition: "Product Designer at CleverTap",
               speakerImage: "assets/images/swapnil.jpeg",
               speakerDescription:
