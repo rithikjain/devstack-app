@@ -112,7 +112,7 @@ class ContactScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ---------- Intrested in devjams section -----------
+          // ---------- Interested in devjams section -----------
           SizedBox(height: 32),
           ShowUp(
             delay: Duration(milliseconds: 200),
@@ -122,7 +122,7 @@ class ContactScreen extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
                   child: Text(
-                    "Intrested in DevJams?",
+                    "Interested in DevJams?",
                     style: TextStyle(
                       color: palePink,
                       fontSize: 20,
