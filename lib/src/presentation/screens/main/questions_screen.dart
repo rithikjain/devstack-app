@@ -40,7 +40,8 @@ class QuestionsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.transparent,
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add, color: Colors.white),
+        backgroundColor: lightBlue,
+        child: Icon(Icons.add, color: palePink),
         onPressed: () {
           showDialog(
             context: context,
