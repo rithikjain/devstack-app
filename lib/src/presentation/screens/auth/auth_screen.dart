@@ -53,21 +53,6 @@ class _AuthScreenState extends State<AuthScreen> with WidgetsBindingObserver {
     Scaffold.of(context).showSnackBar(snackBar);
   }
 
-  void _showSucessSnackBar(BuildContext context, String message) {
-    final snackBar = SnackBar(
-      content: Text(
-        message,
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      behavior: SnackBarBehavior.floating,
-      backgroundColor: Colors.green,
-    );
-    Scaffold.of(context).showSnackBar(snackBar);
-  }
-
   Future<void> _signInWithGoogle(BuildContext context) async {
     try {
       setState(() {
@@ -341,7 +326,7 @@ class _AuthScreenState extends State<AuthScreen> with WidgetsBindingObserver {
       builder: (context) => AlertDialog(
         title: Text("Email Sent!"),
         content:
-            Text("Please check your email for a link to sign into the app."),
+            Text("Please check your email for a link to log into the app."),
         actions: [
           FlatButton(
             child: Text("Okay"),
