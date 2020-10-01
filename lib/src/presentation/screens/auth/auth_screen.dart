@@ -326,8 +326,8 @@ class _AuthScreenState extends State<AuthScreen> with WidgetsBindingObserver {
       context: context,
       builder: (context) => AlertDialog(
         title: Text("Email Sent!"),
-        content:
-            Text("Please check your email for a link to log into the app."),
+        content: Text(
+            "Please check your email for a link to log into the app.\n\n(The app will need to stay in the background in order for the log in process to work)"),
         actions: [
           FlatButton(
             child: Text("Okay"),
