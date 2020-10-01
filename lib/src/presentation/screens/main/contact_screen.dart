@@ -147,10 +147,61 @@ class ContactScreen extends StatelessWidget {
               ],
             ),
           ),
-          // --------- DSC Events section -------
+          // ---------- Checkout DevStack? -----------
           SizedBox(height: 48),
           ShowUp(
             delay: Duration(milliseconds: 300),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                  child: Text(
+                    "Want to know about DevStack?",
+                    style: TextStyle(
+                      color: palePink,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 16),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 32),
+                  child: MaterialButton(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "Yes take me to the website!",
+                          style: WhiteText.copyWith(fontSize: 16),
+                        ),
+                        SizedBox(width: 8),
+                        Container(
+                          height: 35,
+                          width: 35,
+                          child: Image.asset("assets/images/DevStackLogo.png"),
+                        ),
+                      ],
+                    ),
+                    color: lightBlue,
+                    onPressed: () async {
+                      const URL = "https://devstack.dscvit.com/";
+                      if (await canLaunch(URL)) {
+                        await launch(URL);
+                      } else {
+                        _makeErrorSnackbar(context);
+                      }
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // --------- DSC Events section -------
+          SizedBox(height: 48),
+          ShowUp(
+            delay: Duration(milliseconds: 400),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -215,7 +266,7 @@ class ContactScreen extends StatelessWidget {
           // ---------- Connect with us section ---------
           SizedBox(height: 48),
           ShowUp(
-            delay: Duration(milliseconds: 400),
+            delay: Duration(milliseconds: 500),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -276,7 +327,7 @@ class ContactScreen extends StatelessWidget {
           // ---------- Made with love section ---------
           SizedBox(height: 64),
           ShowUp(
-            delay: Duration(milliseconds: 500),
+            delay: Duration(milliseconds: 600),
             child: InkWell(
               onLongPress: () => showDialog(
                 context: context,
