@@ -108,113 +108,134 @@ class _AuthScreenState extends State<AuthScreen> with WidgetsBindingObserver {
     }
   }
 
-  void _showDialog(BuildContext context) {
+  void _showDialog(BuildContext mainContext) {
     showDialog(
-      context: context,
-      child: Dialog(
-        child: Container(
-          margin: EdgeInsets.all(24),
-          child: SingleChildScrollView(
-            child: Material(
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 24),
-                    Container(
-                      child: Text(
-                        "Let's get you in!",
-                        style: BlueText.copyWith(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
+      context: mainContext,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) => Dialog(
+          child: Container(
+            margin: EdgeInsets.all(24),
+            child: SingleChildScrollView(
+              child: Material(
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 24),
+                      Container(
+                        child: Text(
+                          "Let's get you in!",
+                          style: BlueText.copyWith(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 32),
-                    Container(
-                      margin: EdgeInsets.symmetric(vertical: 4),
-                      child: TextFormField(
-                        controller: _emailController,
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
-                          hintText: "Email",
-                        ),
-                        validator: (value) {
-                          Pattern pattern =
-                              r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                          RegExp regex = new RegExp(pattern);
-                          if (!regex.hasMatch(value)) {
-                            return "Please enter a valid email";
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                    SizedBox(height: 48),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        OutlineButton(
-                          child: Text(
-                            "Cancel",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
+                      SizedBox(height: 32),
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: 4),
+                        child: TextFormField(
+                          controller: _emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            hintText: "Email",
                           ),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          highlightedBorderColor: Colors.red,
-                          textColor: Colors.red,
-                          borderSide: BorderSide(
-                            color: Colors.red,
-                            width: 1.5,
-                          ),
-                        ),
-                        SizedBox(width: 16),
-                        OutlineButton(
-                          child: Text(
-                            "Submit",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          onPressed: () async {
-                            if (_formKey.currentState.validate()) {
-                              bool sent = await _sendSignInWithEmailLink();
-                              if (sent) {
-                                _showSucessSnackBar(context, "Email sent!");
-                                print("send");
-                              } else {
-                                _showErrorSnackBar(
-                                  context,
-                                  "Something went wrong!",
-                                );
-                                print("error");
-                              }
-                              Navigator.of(context).pop();
+                          validator: (value) {
+                            Pattern pattern =
+                                r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                            RegExp regex = new RegExp(pattern);
+                            if (!regex.hasMatch(value)) {
+                              return "Please enter a valid email";
                             }
+                            return null;
                           },
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          textColor: Colors.green,
-                          highlightedBorderColor: Colors.green,
-                          borderSide: BorderSide(
-                            color: Colors.green,
-                            width: 1.5,
-                          ),
                         ),
-                        SizedBox(width: 2),
-                      ],
-                    ),
-                    SizedBox(height: 24),
-                  ],
+                      ),
+                      SizedBox(height: 48),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          OutlineButton(
+                            child: Text(
+                              "Cancel",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            highlightedBorderColor: Colors.red,
+                            textColor: Colors.red,
+                            borderSide: BorderSide(
+                              color: Colors.red,
+                              width: 1.5,
+                            ),
+                          ),
+                          SizedBox(width: 16),
+                          OutlineButton(
+                            child: (!_isELoading)
+                                ? Text(
+                                    "Submit",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )
+                                : Container(
+                                    height: 20,
+                                    width: 20,
+                                    child: CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          Colors.green),
+                                    ),
+                                  ),
+                            onPressed: (!_isELoading)
+                                ? () async {
+                                    if (_formKey.currentState.validate()) {
+                                      setState(() {
+                                        _isELoading = true;
+                                      });
+                                      bool sent =
+                                          await _sendSignInWithEmailLink();
+                                      setState(() {
+                                        _isELoading = false;
+                                      });
+                                      if (sent) {
+                                        Navigator.of(context).pop();
+                                        _showEmailSentDialog();
+                                        print("sent");
+                                      } else {
+                                        Navigator.of(context).pop();
+                                        _showErrorSnackBar(
+                                          mainContext,
+                                          "Something went wrong!",
+                                        );
+                                        print("error");
+                                      }
+                                    }
+                                  }
+                                : () {},
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            textColor: Colors.green,
+                            highlightedBorderColor: Colors.green,
+                            borderSide: BorderSide(
+                              color: Colors.green,
+                              width: 1.5,
+                            ),
+                          ),
+                          SizedBox(width: 2),
+                        ],
+                      ),
+                      SizedBox(height: 24),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -230,7 +251,7 @@ class _AuthScreenState extends State<AuthScreen> with WidgetsBindingObserver {
       _email = _emailController.text.trim();
     });
     try {
-      user.sendSignInLinkToEmail(
+      await user.sendSignInLinkToEmail(
         email: _emailController.text.trim(),
         actionCodeSettings: ActionCodeSettings(
           url: "https://devtalks.page.link/check",
@@ -241,13 +262,12 @@ class _AuthScreenState extends State<AuthScreen> with WidgetsBindingObserver {
           handleCodeInApp: true,
         ),
       );
+      print(_emailController.text.trim() + "<< sent");
+      return true;
     } catch (e) {
-      _showGenDialog(e.toString());
       print(e);
       return false;
     }
-    print(_emailController.text.trim() + "<< sent");
-    return true;
   }
 
   @override
@@ -282,6 +302,9 @@ class _AuthScreenState extends State<AuthScreen> with WidgetsBindingObserver {
     }, onError: (OnLinkErrorException e) async {
       print('onLinkError');
       print(e.message);
+      _showGenDialog(
+        "Something went wrong, Maybe the link expired. Try again!",
+      );
     });
 
     return "";
@@ -296,7 +319,6 @@ class _AuthScreenState extends State<AuthScreen> with WidgetsBindingObserver {
           email: _email,
           emailLink: _link,
         );
-        //_showSucessSnackBar(context, "Sign in successful");
         SharedPrefs.setLoggedInStatus(true);
         Navigator.pushNamedAndRemoveUntil(
           context,
@@ -313,16 +335,35 @@ class _AuthScreenState extends State<AuthScreen> with WidgetsBindingObserver {
     }
   }
 
+  void _showEmailSentDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("Email Sent!"),
+        content:
+            Text("Please check your email for a link to sign into the app."),
+        actions: [
+          FlatButton(
+            child: Text("Okay"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
   void _showGenDialog(String error) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: new Text("Error"),
-          content: new Text("Please Try Again, Error code: " + error),
-          actions: <Widget>[
-            new FlatButton(
-              child: new Text("Close"),
+          title: Text("Error"),
+          content: Text("Please Try Again, Error code: " + error),
+          actions: [
+            FlatButton(
+              child: Text("Close"),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -417,31 +458,26 @@ class _AuthScreenState extends State<AuthScreen> with WidgetsBindingObserver {
                               width: MediaQuery.of(context).size.width * 0.6,
                               child: RaisedButton(
                                 onPressed: () async {
-                                  if (!_isELoading) {
-                                    _showDialog(context);
-                                  }
+                                  _showDialog(context);
                                 },
                                 color: Colors.white,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                                child: (!_isELoading)
-                                    ? Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          Text('Login with Email'),
-                                          SizedBox(
-                                            width: 20,
-                                          ),
-                                          Icon(Icons.email, color: darkBlue),
-                                        ],
-                                      )
-                                    : Container(
-                                        height: 35,
-                                        width: 35,
-                                        child: CircularProgressIndicator(),
-                                      ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Text('Login with Email'),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    Icon(
+                                      Icons.email,
+                                      color: darkBlue,
+                                      size: 28,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
