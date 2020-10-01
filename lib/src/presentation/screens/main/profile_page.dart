@@ -24,19 +24,16 @@ class ProfilePage extends StatelessWidget {
             CircleAvatar(
               radius: 68,
               backgroundColor: lightBlue,
-              child: (_user.photoURL != null)
-                  ? CircleAvatar(
-                      radius: 60,
-                      backgroundImage:
-                          CachedNetworkImageProvider(_user.photoURL),
-                    )
-                  : Container(),
+              child: CircleAvatar(
+                radius: 60,
+                backgroundImage: CachedNetworkImageProvider(_user.photoURL ?? "https://ssl.gstatic.com/images/branding/product/1x/avatar_anonymous_512dp.png"),
+              ),
             ),
             SizedBox(height: 56),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 8),
               child: Text(
-                (_user.displayName != null) ? _user.displayName : "<Your Name>",
+                _user.displayName.isEmpty ? _user.email : _user.displayName,
                 textAlign: TextAlign.center,
                 style: WhiteText.copyWith(
                   fontWeight: FontWeight.bold,
@@ -48,7 +45,7 @@ class ProfilePage extends StatelessWidget {
             Container(
               margin: EdgeInsets.symmetric(horizontal: 8),
               child: Text(
-                _user.email,
+                _user.displayName.isEmpty ? "" : _user.email,
                 textAlign: TextAlign.center,
                 style: WhiteText.copyWith(
                   fontSize: 18,
