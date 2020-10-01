@@ -102,6 +102,7 @@ class _AuthScreenState extends State<AuthScreen> with WidgetsBindingObserver {
             margin: EdgeInsets.all(24),
             child: SingleChildScrollView(
               child: Material(
+                color: Colors.transparent,
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -380,94 +381,100 @@ class _AuthScreenState extends State<AuthScreen> with WidgetsBindingObserver {
                       child: Image.asset("assets/images/devtalks.png"),
                     ),
                     Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ShowUp(
-                            delay: Duration(milliseconds: 200),
-                            child: Container(
-                              alignment: Alignment.center,
-                              margin: EdgeInsets.symmetric(horizontal: 32),
-                              width: 200,
-                              child: Image.asset(
-                                "assets/images/devtalks_logo.png",
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height / 7,
+                            ),
+                            ShowUp(
+                              delay: Duration(milliseconds: 200),
+                              child: Container(
+                                alignment: Alignment.center,
+                                margin: EdgeInsets.symmetric(horizontal: 32),
+                                width: 200,
+                                child: Image.asset(
+                                  "assets/images/devtalks_logo.png",
+                                ),
                               ),
                             ),
-                          ),
-                          SizedBox(
-                              height: MediaQuery.of(context).size.height / 6),
-                          ShowUp(
-                            delay: Duration(milliseconds: 300),
-                            child: Container(
-                              height: 50,
-                              width: MediaQuery.of(context).size.width * 0.6,
-                              child: RaisedButton(
-                                onPressed: () async {
-                                  if (!_isGLoading) {
-                                    await _signInWithGoogle(context);
-                                  }
-                                },
-                                color: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height / 6,
+                            ),
+                            ShowUp(
+                              delay: Duration(milliseconds: 300),
+                              child: Container(
+                                height: 50,
+                                width: MediaQuery.of(context).size.width * 0.6,
+                                child: RaisedButton(
+                                  onPressed: () async {
+                                    if (!_isGLoading) {
+                                      await _signInWithGoogle(context);
+                                    }
+                                  },
+                                  color: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: (!_isGLoading)
+                                      ? Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            Text('Login with Google'),
+                                            SizedBox(
+                                              width: 20,
+                                            ),
+                                            Image.asset(
+                                              "assets/images/g_logo.png",
+                                              fit: BoxFit.contain,
+                                              height: 24,
+                                            )
+                                          ],
+                                        )
+                                      : Container(
+                                          height: 35,
+                                          width: 35,
+                                          child: CircularProgressIndicator(),
+                                        ),
                                 ),
-                                child: (!_isGLoading)
-                                    ? Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          Text('Login with Google'),
-                                          SizedBox(
-                                            width: 20,
-                                          ),
-                                          Image.asset(
-                                            "assets/images/g_logo.png",
-                                            fit: BoxFit.contain,
-                                            height: 24,
-                                          )
-                                        ],
-                                      )
-                                    : Container(
-                                        height: 35,
-                                        width: 35,
-                                        child: CircularProgressIndicator(),
+                              ),
+                            ),
+                            SizedBox(height: 24),
+                            ShowUp(
+                              delay: Duration(milliseconds: 300),
+                              child: Container(
+                                height: 50,
+                                width: MediaQuery.of(context).size.width * 0.6,
+                                child: RaisedButton(
+                                  onPressed: () async {
+                                    _showDialog(context);
+                                  },
+                                  color: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Text('Login with Email'),
+                                      SizedBox(
+                                        width: 20,
                                       ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 24),
-                          ShowUp(
-                            delay: Duration(milliseconds: 300),
-                            child: Container(
-                              height: 50,
-                              width: MediaQuery.of(context).size.width * 0.6,
-                              child: RaisedButton(
-                                onPressed: () async {
-                                  _showDialog(context);
-                                },
-                                color: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Text('Login with Email'),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    Icon(
-                                      Icons.email,
-                                      color: darkBlue,
-                                      size: 28,
-                                    ),
-                                  ],
+                                      Icon(
+                                        Icons.email,
+                                        color: darkBlue,
+                                        size: 28,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          SizedBox(height: 75),
-                        ],
+                            //SizedBox(height: 75),
+                          ],
+                        ),
                       ),
                     ),
                   ],
