@@ -8,6 +8,7 @@ import 'package:devtalks/src/presentation/screens/main/speakers_screen.dart';
 import 'package:devtalks/src/presentation/themes/themes.dart';
 import 'package:devtalks/src/presentation/widgets/bg_gradient.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BaseScreen extends StatefulWidget {
   static const routename = "/base";
@@ -66,6 +67,14 @@ class _BaseScreenState extends State<BaseScreen> {
                           child: Image.asset("assets/images/devtalks.png"),
                         ),
                         onLongPress: () => _controllerTopCenter.play(),
+                        onTap: () async {
+                          const URL = "https://devstack.dscvit.com/";
+                          if (await canLaunch(URL)) {
+                            await launch(URL);
+                          } else {
+                            _makeErrorSnackbar(context);
+                          }
+                        },
                       ),
                       Expanded(
                         child: Align(
@@ -157,5 +166,20 @@ class _BaseScreenState extends State<BaseScreen> {
         ),
       ),
     );
+  }
+
+  void _makeErrorSnackbar(BuildContext context) {
+    final snackBar = SnackBar(
+      content: Text(
+        'Something went wrong!',
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: Colors.red,
+    );
+    Scaffold.of(context).showSnackBar(snackBar);
   }
 }
