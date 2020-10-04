@@ -35,6 +35,13 @@ class SpeakersScreen extends StatelessWidget {
               speakerDescription:
                   "Senthilkumar has a great passion for innovating through technology to solve real-life problems. He has innovated from fields like wireless network to safety solutions and filed nearly 10+ patents for the same.",
             ),
+            SpeakerCard(
+              speakerName: "Sandeep Khurana",
+              speakerPosition: "Research Scholar at ISB",
+              speakerImage: "assets/images/sandeepkhurana.jpeg",
+              speakerDescription:
+                  "An ex-army officer, Sandeep is a brilliant data scientist who is highly drawn towards research and public causes.",
+            ),
           ],
           options: CarouselOptions(
             autoPlay: false,

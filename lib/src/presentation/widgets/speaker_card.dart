@@ -29,8 +29,9 @@ class SpeakerCard extends StatelessWidget {
               Container(
                 margin: EdgeInsets.only(bottom: 16),
                 height: 100,
+                width: 100,
                 child: ClipOval(
-                  child: Image.asset(speakerImage),
+                  child: Image.asset(speakerImage, fit: BoxFit.cover),
                 ),
               ),
               SizedBox(height: 8),
